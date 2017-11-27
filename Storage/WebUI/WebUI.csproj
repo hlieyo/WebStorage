@@ -1,0 +1,609 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{9BF07BC6-7ECC-4D69-B371-2E0CA19A505A}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WebUI</RootNamespace>
+    <AssemblyName>WebUI</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Foundation.Cls">
+      <HintPath>..\packages\Foundation.Cls.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationInsights">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.2.2.0\lib\net45\Microsoft.ApplicationInsights.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.Agent.Intercept">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.0.6\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.DependencyCollector">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.2.0\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.PerfCounterCollector">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.2.0\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.ServerTelemetryChannel">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.2.0\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.WindowsServer">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.2.2.0\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.Web">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.2.2.0\lib\net45\Microsoft.AI.Web.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="CommonHelper\ValidateCodeService.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\assets\css\4095-rtl.min.css" />
+    <Content Include="Content\assets\css\animate.css" />
+    <Content Include="Content\assets\css\animate.min.css" />
+    <Content Include="Content\assets\css\beyond-rtl.css" />
+    <Content Include="Content\assets\css\beyond-rtl.min.css" />
+    <Content Include="Content\assets\css\beyond.css" />
+    <Content Include="Content\assets\css\beyond.min.css" />
+    <Content Include="Content\assets\css\bootstrap-rtl.css" />
+    <Content Include="Content\assets\css\bootstrap-rtl.min.css" />
+    <Content Include="Content\assets\css\bootstrap.css" />
+    <Content Include="Content\assets\css\bootstrap.min.css" />
+    <Content Include="Content\assets\css\datatables.bootstrap.css" />
+    <Content Include="Content\assets\css\demo.css" />
+    <Content Include="Content\assets\css\demo.min.css" />
+    <Content Include="Content\assets\css\font-awesome.css" />
+    <Content Include="Content\assets\css\font-awesome.min.css" />
+    <Content Include="Content\assets\css\googleapisFont.css" />
+    <Content Include="Content\assets\css\other-less\LessHat.css" />
+    <Content Include="Content\assets\css\other-less\lesshat.min.css" />
+    <Content Include="Content\assets\css\skins\azure.css" />
+    <Content Include="Content\assets\css\skins\azure.min.css" />
+    <Content Include="Content\assets\css\skins\black.css" />
+    <Content Include="Content\assets\css\skins\black.min.css" />
+    <Content Include="Content\assets\css\skins\blue.css" />
+    <Content Include="Content\assets\css\skins\blue.min.css" />
+    <Content Include="Content\assets\css\skins\darkblue.css" />
+    <Content Include="Content\assets\css\skins\darkblue.min.css" />
+    <Content Include="Content\assets\css\skins\darkred.css" />
+    <Content Include="Content\assets\css\skins\darkred.min.css" />
+    <Content Include="Content\assets\css\skins\deepblue.css" />
+    <Content Include="Content\assets\css\skins\deepblue.min.css" />
+    <Content Include="Content\assets\css\skins\gray.css" />
+    <Content Include="Content\assets\css\skins\gray.min.css" />
+    <Content Include="Content\assets\css\skins\green.css" />
+    <Content Include="Content\assets\css\skins\green.min.css" />
+    <Content Include="Content\assets\css\skins\orange.css" />
+    <Content Include="Content\assets\css\skins\orange.min.css" />
+    <Content Include="Content\assets\css\skins\pink.css" />
+    <Content Include="Content\assets\css\skins\pink.min.css" />
+    <Content Include="Content\assets\css\skins\purple.css" />
+    <Content Include="Content\assets\css\skins\purple.min.css" />
+    <Content Include="Content\assets\css\skins\skins-mixins.css" />
+    <Content Include="Content\assets\css\skins\skins-mixins.min.css" />
+    <Content Include="Content\assets\css\skins\teal.css" />
+    <Content Include="Content\assets\css\skins\teal.min.css" />
+    <Content Include="Content\assets\css\typicons.css" />
+    <Content Include="Content\assets\css\typicons.min.css" />
+    <Content Include="Content\assets\css\weather-icons.css" />
+    <Content Include="Content\assets\css\weather-icons.min.css" />
+    <Content Include="Content\assets\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\assets\fonts\fontawesome-webfont.svg%40v=4.3.0.xml" />
+    <Content Include="Content\assets\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\assets\fonts\glyphicons-halflings-regular.svg.xml" />
+    <Content Include="Content\assets\fonts\typicons.svg" />
+    <Content Include="Content\assets\fonts\typicons.svg.xml" />
+    <Content Include="Content\assets\fonts\weathericons-regular-webfont.svg" />
+    <Content Include="Content\assets\fonts\weathericons-regular-webfont.svg.xml" />
+    <Content Include="Content\assets\img\angle-down.png" />
+    <Content Include="Content\assets\img\app-45616.png" />
+    <Content Include="Content\assets\img\app.png" />
+    <Content Include="Content\assets\img\attach-blue.png" />
+    <Content Include="Content\assets\img\attach-green.png" />
+    <Content Include="Content\assets\img\attach-red.png" />
+    <Content Include="Content\assets\img\attach-yellow.png" />
+    <Content Include="Content\assets\img\avatars\adam-jansen.jpg" />
+    <Content Include="Content\assets\img\avatars\bing.png" />
+    <Content Include="Content\assets\img\avatars\divyia.jpg" />
+    <Content Include="Content\assets\img\avatars\javi-jimenez.jpg" />
+    <Content Include="Content\assets\img\avatars\john-smith.jpg" />
+    <Content Include="Content\assets\img\avatars\lee-munroe.jpg" />
+    <Content Include="Content\assets\img\avatars\matt-cheuvront.jpg" />
+    <Content Include="Content\assets\img\avatars\nicolai-larson.jpg" />
+    <Content Include="Content\assets\img\avatars\osvaldus-valutis.jpg" />
+    <Content Include="Content\assets\img\avatars\sergey-azovskiy.jpg" />
+    <Content Include="Content\assets\img\avatars\stephanie-walter.jpg" />
+    <Content Include="Content\assets\img\favicon.png" />
+    <Content Include="Content\assets\img\jquery.minicolors.png" />
+    <Content Include="Content\assets\img\logo-inverted.png" />
+    <Content Include="Content\assets\img\logo-rtl.png" />
+    <Content Include="Content\assets\img\logo-solo.png" />
+    <Content Include="Content\assets\img\logo.png" />
+    <Content Include="Content\assets\img\sohan.png" />
+    <Content Include="Content\assets\img\sohanh.png" />
+    <Content Include="Content\assets\img\sort_asc.png" />
+    <Content Include="Content\assets\img\sort_asc_disabled.png" />
+    <Content Include="Content\assets\img\sort_both.png" />
+    <Content Include="Content\assets\img\sort_desc.png" />
+    <Content Include="Content\assets\img\sort_desc_disabled.png" />
+    <Content Include="Content\assets\img\temp1.png" />
+    <Content Include="Content\assets\img\tree-icons.png" />
+    <Content Include="Content\assets\js\beyond.js" />
+    <Content Include="Content\assets\js\beyond.min.js" />
+    <Content Include="Content\assets\js\bootbox\bootbox.js" />
+    <Content Include="Content\assets\js\bootstrap.js" />
+    <Content Include="Content\assets\js\bootstrap.min.js" />
+    <Content Include="Content\assets\js\charts\chartjs\chart.js" />
+    <Content Include="Content\assets\js\charts\chartjs\chart.min.js" />
+    <Content Include="Content\assets\js\charts\chartjs\chartjs-init.js" />
+    <Content Include="Content\assets\js\charts\easypiechart\easypiechart-init.js" />
+    <Content Include="Content\assets\js\charts\easypiechart\jquery.easypiechart.js" />
+    <Content Include="Content\assets\js\charts\easypiechart\jquery.easypiechart.min.js" />
+    <Content Include="Content\assets\js\charts\flot\flot-init.js" />
+    <Content Include="Content\assets\js\charts\flot\jquery.flot.axislabels.js" />
+    <Content Include="Content\assets\js\charts\flot\jquery.flot.categories.js" />
+    <Content Include="Content\assets\js\charts\flot\jquery.flot.categories.min.js" />
+    <Content Include="Content\assets\js\charts\flot\jquery.flot.crosshair.js" />
+    <Content Include="Content\assets\js\charts\flot\jquery.flot.crosshair.min.js" />
+    <Content Include="Content\assets\js\charts\flot\jquery.flot.fillbetween.js" />
+    <Content Include="Content\assets\js\charts\flot\jquery.flot.fillbetween.min.js" />
+    <Content Include="Content\assets\js\charts\flot\jquery.flot.js" />
+    <Content Include="Content\assets\js\charts\flot\jquery.flot.min.js" />
+    <Content Include="Content\assets\js\charts\flot\jquery.flot.orderbars.js" />
+    <Content Include="Content\assets\js\charts\flot\jquery.flot.pie.js" />
+    <Content Include="Content\assets\js\charts\flot\jquery.flot.pie.min.js" />
+    <Content Include="Content\assets\js\charts\flot\jquery.flot.resize.js" />
+    <Content Include="Content\assets\js\charts\flot\jquery.flot.resize.min.js" />
+    <Content Include="Content\assets\js\charts\flot\jquery.flot.selection.js" />
+    <Content Include="Content\assets\js\charts\flot\jquery.flot.selection.min.js" />
+    <Content Include="Content\assets\js\charts\flot\jquery.flot.stack.js" />
+    <Content Include="Content\assets\js\charts\flot\jquery.flot.stack.min.js" />
+    <Content Include="Content\assets\js\charts\flot\jquery.flot.time.js" />
+    <Content Include="Content\assets\js\charts\flot\jquery.flot.time.min.js" />
+    <Content Include="Content\assets\js\charts\flot\jquery.flot.tooltip.js" />
+    <Content Include="Content\assets\js\charts\flot\jquery.flot.tooltip.min.js" />
+    <Content Include="Content\assets\js\charts\morris\morris-init.js" />
+    <Content Include="Content\assets\js\charts\morris\morris.js" />
+    <Content Include="Content\assets\js\charts\morris\raphael-2.0.2.min.js" />
+    <Content Include="Content\assets\js\charts\sparkline\jquery.sparkline.js" />
+    <Content Include="Content\assets\js\charts\sparkline\sparkline-init.js" />
+    <Content Include="Content\assets\js\colorpicker\jquery.minicolors.js" />
+    <Content Include="Content\assets\js\datatable\datatables-init.js" />
+    <Content Include="Content\assets\js\datatable\dataTables.bootstrap.css" />
+    <Content Include="Content\assets\js\datatable\dataTables.bootstrap.js" />
+    <Content Include="Content\assets\js\datatable\datatables.bootstrap.min.js" />
+    <Content Include="Content\assets\js\datatable\dataTables.tableTools.js" />
+    <Content Include="Content\assets\js\datatable\datatables.tabletools.min.js" />
+    <Content Include="Content\assets\js\datatable\jquery.dataTables.js" />
+    <Content Include="Content\assets\js\datatable\jquery.datatables.min.js" />
+    <Content Include="Content\assets\js\datatable\zeroclipboard.js" />
+    <Content Include="Content\assets\js\datetime\bootstrap-datepicker.js" />
+    <Content Include="Content\assets\js\datetime\bootstrap-timepicker.js" />
+    <Content Include="Content\assets\js\datetime\daterangepicker.js" />
+    <Content Include="Content\assets\js\datetime\daterangepicker.zh-CN.js" />
+    <Content Include="Content\assets\js\datetime\moment.js" />
+    <Content Include="Content\assets\js\dropzone\dropzone.min.js" />
+    <Content Include="Content\assets\js\editors\summernote\summernote.js" />
+    <Content Include="Content\assets\js\editors\wysiwyg\bootstrap-wysiwyg.js" />
+    <Content Include="Content\assets\js\editors\wysiwyg\jquery.hotkeys.js" />
+    <Content Include="Content\assets\js\editors\wysiwyg\prettify.js" />
+    <Content Include="Content\assets\js\fuelux\spinbox\fuelux.spinbox.js" />
+    <Content Include="Content\assets\js\fuelux\spinbox\fuelux.spinbox.min.js" />
+    <Content Include="Content\assets\js\fuelux\treeview\tree-custom.min.js" />
+    <Content Include="Content\assets\js\fuelux\treeview\treeview-init.js" />
+    <Content Include="Content\assets\js\fuelux\wizard\wizard-custom.js" />
+    <Content Include="Content\assets\js\fuelux\wizard\wizard-custom.min.js" />
+    <Content Include="Content\assets\js\fullcalendar\fullcalendar.js" />
+    <Content Include="Content\assets\js\fullcalendar\fullcalendar.min.js" />
+    <Content Include="Content\assets\js\fullcalendar\jquery-ui.custom.min.js" />
+    <Content Include="Content\assets\js\fullcalendar\moment.min.js" />
+    <Content Include="Content\assets\js\inputmask\jasny-bootstrap.js" />
+    <Content Include="Content\assets\js\inputmask\jasny-bootstrap.min.js" />
+    <Content Include="Content\assets\js\jquery-ui-1.10.4.custom.js" />
+    <Content Include="Content\assets\js\jquery-ui-1.10.4.custom.min.js" />
+    <Content Include="Content\assets\js\jquery.min.js" />
+    <Content Include="Content\assets\js\knob\jquery.knob.js" />
+    <Content Include="Content\assets\js\nestable\jquery.nestable.min.js" />
+    <Content Include="Content\assets\js\select2\select2.js" />
+    <Content Include="Content\assets\js\skins.min.js" />
+    <Content Include="Content\assets\js\slider\jqrangeslider\jqallrangesliders-withruler-min.js" />
+    <Content Include="Content\assets\js\slider\jquery.nouislider.js" />
+    <Content Include="Content\assets\js\slimscroll\jquery.slimscroll.js" />
+    <Content Include="Content\assets\js\slimscroll\jquery.slimscroll.min.js" />
+    <Content Include="Content\assets\js\tagsinput\bootstrap-tagsinput.js" />
+    <Content Include="Content\assets\js\textarea\jquery.autosize.js" />
+    <Content Include="Content\assets\js\textarea\jquery.autosize.min.js" />
+    <Content Include="Content\assets\js\toastr\toastr.js" />
+    <Content Include="Content\assets\js\validation\bootstrapvalidator.js" />
+    <Content Include="Content\assets\sound\alert.mp3" />
+    <Content Include="Content\assets\swf\copy_csv_xls.swf" />
+    <Content Include="Content\assets\swf\copy_csv_xls_pdf.swf" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\dist\sweetalert-dev.js" />
+    <Content Include="Content\dist\sweetalert.css" />
+    <Content Include="Content\dist\sweetalert.min.js" />
+    <Content Include="Content\laydate\laydate.js" />
+    <Content Include="Content\laydate\need\laydate.css" />
+    <Content Include="Content\laydate\skins\dahong\icon.png" />
+    <Content Include="Content\laydate\skins\dahong\laydate.css" />
+    <Content Include="Content\laydate\skins\default\icon.png" />
+    <Content Include="Content\laydate\skins\default\laydate.css" />
+    <Content Include="Content\laydate\skins\molv\icon.png" />
+    <Content Include="Content\laydate\skins\molv\laydate.css" />
+    <Content Include="Content\msgbox\gb_tip_layer.png" />
+    <Content Include="Content\msgbox\gb_tip_layer_ie6.png" />
+    <Content Include="Content\msgbox\loading.gif" />
+    <Content Include="Content\msgbox\min.js" />
+    <Content Include="Content\msgbox\msgbox.css" />
+    <Content Include="Content\msgbox\msgbox.html" />
+    <Content Include="Content\msgbox\msgbox.js" />
+    <Content Include="Content\myPagination\images\image1.gif" />
+    <Content Include="Content\myPagination\images\image2.gif" />
+    <Content Include="Content\myPagination\jquery.myPagination6.0.js" />
+    <Content Include="Content\myPagination\page.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="ApplicationInsights.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\assets\css\beyond-less\400-500.less" />
+    <Content Include="Content\assets\css\beyond-less\accordions.less" />
+    <Content Include="Content\assets\css\beyond-less\alerts.less" />
+    <Content Include="Content\assets\css\beyond-less\angular-daterangepicker.less" />
+    <Content Include="Content\assets\css\beyond-less\angular-slider.less" />
+    <Content Include="Content\assets\css\beyond-less\angular-treeview.less" />
+    <Content Include="Content\assets\css\beyond-less\animations.less" />
+    <Content Include="Content\assets\css\beyond-less\body.less" />
+    <Content Include="Content\assets\css\beyond-less\breadcrumbs.less" />
+    <Content Include="Content\assets\css\beyond-less\buttons.less" />
+    <Content Include="Content\assets\css\beyond-less\charts.less" />
+    <Content Include="Content\assets\css\beyond-less\chat.less" />
+    <Content Include="Content\assets\css\beyond-less\checkbox-radiobox.less" />
+    <Content Include="Content\assets\css\beyond-less\colorpicker.less" />
+    <Content Include="Content\assets\css\beyond-less\colors.less" />
+    <Content Include="Content\assets\css\beyond-less\comment.less" />
+    <Content Include="Content\assets\css\beyond-less\dashboard.less" />
+    <Content Include="Content\assets\css\beyond-less\databoxes.less" />
+    <Content Include="Content\assets\css\beyond-less\datepicker.less" />
+    <Content Include="Content\assets\css\beyond-less\dropdowns.less" />
+    <Content Include="Content\assets\css\beyond-less\dropzone.less" />
+    <Content Include="Content\assets\css\beyond-less\editors.less" />
+    <Content Include="Content\assets\css\beyond-less\fonts.less" />
+    <Content Include="Content\assets\css\beyond-less\forms-inputs.less" />
+    <Content Include="Content\assets\css\beyond-less\fullcalendar.less" />
+    <Content Include="Content\assets\css\beyond-less\helpers.less" />
+    <Content Include="Content\assets\css\beyond-less\invoice.less" />
+    <Content Include="Content\assets\css\beyond-less\labels-badges.less" />
+    <Content Include="Content\assets\css\beyond-less\loading.less" />
+    <Content Include="Content\assets\css\beyond-less\lockscreen.less" />
+    <Content Include="Content\assets\css\beyond-less\login.less" />
+    <Content Include="Content\assets\css\beyond-less\mail.less" />
+    <Content Include="Content\assets\css\beyond-less\main-container.less" />
+    <Content Include="Content\assets\css\beyond-less\modals.less" />
+    <Content Include="Content\assets\css\beyond-less\navbar.less" />
+    <Content Include="Content\assets\css\beyond-less\nestable-lists.less" />
+    <Content Include="Content\assets\css\beyond-less\ng-tags-input.less" />
+    <Content Include="Content\assets\css\beyond-less\notifications.less" />
+    <Content Include="Content\assets\css\beyond-less\orders.less" />
+    <Content Include="Content\assets\css\beyond-less\page-content.less" />
+    <Content Include="Content\assets\css\beyond-less\page-header-body.less" />
+    <Content Include="Content\assets\css\beyond-less\pagination.less" />
+    <Content Include="Content\assets\css\beyond-less\popovers.less" />
+    <Content Include="Content\assets\css\beyond-less\pricing.less" />
+    <Content Include="Content\assets\css\beyond-less\profile.less" />
+    <Content Include="Content\assets\css\beyond-less\progressbars.less" />
+    <Content Include="Content\assets\css\beyond-less\register.less" />
+    <Content Include="Content\assets\css\beyond-less\search-help-bar.less" />
+    <Content Include="Content\assets\css\beyond-less\select2.less" />
+    <Content Include="Content\assets\css\beyond-less\sidebar.less" />
+    <Content Include="Content\assets\css\beyond-less\sliders.less" />
+    <Content Include="Content\assets\css\beyond-less\spaces.less" />
+    <Content Include="Content\assets\css\beyond-less\spinners.less" />
+    <Content Include="Content\assets\css\beyond-less\switches.less" />
+    <Content Include="Content\assets\css\beyond-less\tables.less" />
+    <Content Include="Content\assets\css\beyond-less\tabs.less" />
+    <Content Include="Content\assets\css\beyond-less\tagsinput.less" />
+    <Content Include="Content\assets\css\beyond-less\tasks.less" />
+    <Content Include="Content\assets\css\beyond-less\tickets.less" />
+    <Content Include="Content\assets\css\beyond-less\timeline.less" />
+    <Content Include="Content\assets\css\beyond-less\timepicker.less" />
+    <Content Include="Content\assets\css\beyond-less\tooltips.less" />
+    <Content Include="Content\assets\css\beyond-less\treeview.less" />
+    <Content Include="Content\assets\css\beyond-less\typography.less" />
+    <Content Include="Content\assets\css\beyond-less\validator.less" />
+    <Content Include="Content\assets\css\beyond-less\variables.less" />
+    <Content Include="Content\assets\css\beyond-less\wells.less" />
+    <Content Include="Content\assets\css\beyond-less\widget.less" />
+    <Content Include="Content\assets\css\beyond-less\wizards.less" />
+    <Content Include="Content\assets\css\beyond-rtl.css.map" />
+    <Content Include="Content\assets\css\beyond.css.map" />
+    <Content Include="Content\assets\css\beyond.less" />
+    <Content Include="Content\assets\css\bootstrap-rtl.css.map" />
+    <Content Include="Content\assets\css\bootstrap.css.map" />
+    <Content Include="Content\assets\css\demo.css.map" />
+    <Content Include="Content\assets\css\demo.less" />
+    <Content Include="Content\assets\css\other-less\lesshat.less" />
+    <Content Include="Content\assets\css\skins\azure.css.map" />
+    <Content Include="Content\assets\css\skins\azure.less" />
+    <Content Include="Content\assets\css\skins\black.css.map" />
+    <Content Include="Content\assets\css\skins\black.less" />
+    <Content Include="Content\assets\css\skins\Blue.css.map" />
+    <Content Include="Content\assets\css\skins\Blue.less" />
+    <Content Include="Content\assets\css\skins\darkblue.css.map" />
+    <Content Include="Content\assets\css\skins\darkblue.less" />
+    <Content Include="Content\assets\css\skins\darkred.css.map" />
+    <Content Include="Content\assets\css\skins\darkred.less" />
+    <Content Include="Content\assets\css\skins\deepblue.css.map" />
+    <Content Include="Content\assets\css\skins\deepblue.less" />
+    <Content Include="Content\assets\css\skins\gray.css.map" />
+    <Content Include="Content\assets\css\skins\gray.less" />
+    <Content Include="Content\assets\css\skins\green.css.map" />
+    <Content Include="Content\assets\css\skins\green.less" />
+    <Content Include="Content\assets\css\skins\orange.css.map" />
+    <Content Include="Content\assets\css\skins\orange.less" />
+    <Content Include="Content\assets\css\skins\pink.css.map" />
+    <Content Include="Content\assets\css\skins\pink.less" />
+    <Content Include="Content\assets\css\skins\purple.css.map" />
+    <Content Include="Content\assets\css\skins\purple.less" />
+    <Content Include="Content\assets\css\skins\skins-mixins.css.map" />
+    <Content Include="Content\assets\css\skins\skins-mixins.less" />
+    <Content Include="Content\assets\css\skins\teal.css.map" />
+    <Content Include="Content\assets\css\skins\teal.less" />
+    <Content Include="Content\assets\fonts\BYekan.woff" />
+    <Content Include="Content\assets\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\assets\fonts\fontawesome-webfont.eot%40" />
+    <Content Include="Content\assets\fonts\fontawesome-webfont.eot%40v=4.3.0" />
+    <Content Include="Content\assets\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\assets\fonts\fontawesome-webfont.ttf%40v=4.3.0" />
+    <Content Include="Content\assets\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\assets\fonts\fontawesome-webfont.woff%40v=4.3.0" />
+    <Content Include="Content\assets\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\assets\fonts\fontawesome-webfont.woff2%40v=4.3.0" />
+    <Content Include="Content\assets\fonts\FontAwesome.otf" />
+    <Content Include="Content\assets\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\assets\fonts\glyphicons-halflings-regular.eot%40" />
+    <Content Include="Content\assets\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\assets\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\assets\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Content\assets\fonts\typicons.eot" />
+    <Content Include="Content\assets\fonts\typicons.eot%40" />
+    <Content Include="Content\assets\fonts\typicons.ttf" />
+    <Content Include="Content\assets\fonts\typicons.woff" />
+    <Content Include="Content\assets\fonts\weathericons-regular-webfont.eot" />
+    <Content Include="Content\assets\fonts\weathericons-regular-webfont.eot%40" />
+    <Content Include="Content\assets\fonts\weathericons-regular-webfont.ttf" />
+    <Content Include="Content\assets\fonts\weathericons-regular-webfont.woff" />
+    <Content Include="Content\assets\fonts\WeatherIcons-Regular.otf" />
+    <Content Include="Content\assets\js\charts\easypiechart\jquery.easypiechart.min.js.map" />
+    <Content Include="Content\assets\js\charts\flot\jquery.flot.min.js.map" />
+    <Content Include="Content\assets\js\charts\flot\jquery.flot.tooltip.min.js.map" />
+    <Content Include="Content\assets\js\datatable\data.json" />
+    <Content Include="Content\assets\js\datatable\dataTables.bootstrap.min.js.map" />
+    <Content Include="Content\assets\js\datatable\dataTables.tableTools.min.js.map" />
+    <Content Include="Content\assets\js\fuelux\spinbox\fuelux.spinbox.min.js.map" />
+    <Content Include="Content\assets\js\fuelux\wizard\wizard-custom.min.js.map" />
+    <Content Include="Content\assets\js\slimscroll\jquery.slimscroll.min.js.map" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\Home\InView.cshtml" />
+    <Content Include="Views\Home\OutView.cshtml" />
+    <Content Include="Views\Home\ShopsView.cshtml" />
+    <Content Include="Views\Home\AddShops.cshtml" />
+    <Content Include="Views\Home\ShopsReport.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{c15af75c-c812-443c-9276-920e027779fc}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Logic\Logic.csproj">
+      <Project>{e49a2309-78c8-4c02-a2b1-ed124f636ad2}</Project>
+      <Name>Logic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Model\Model.csproj">
+      <Project>{997d8dfb-f332-4a70-a031-011e82c5be09}</Project>
+      <Name>Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>51874</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:51874/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>这台计算机上缺少此项目引用的 NuGet 程序包。使用“NuGet 程序包还原”可下载这些程序包。有关更多信息，请参见 http://go.microsoft.com/fwlink/?LinkID=322105。缺少的文件是 {0}。</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

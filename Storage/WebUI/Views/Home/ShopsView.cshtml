@@ -1,0 +1,285 @@
+﻿
+@{
+    ViewBag.Title = "我的库存";
+}
+
+<!--Page Related styles-->
+<link href="~/Content/assets/css/datatables.bootstrap.css" rel="stylesheet" />
+
+<div class="row">
+    <div class="col-xs-12 col-md-12">
+        <div class="widget">
+            <div class="widget-header ">
+                <span class="widget-caption">我的库存</span>
+                <div class="widget-buttons">
+                    @*<a href="#" data-toggle="maximize">
+                            <i class="fa fa-expand"></i>
+                        </a>
+                        <a href="#" data-toggle="collapse">
+                            <i class="fa fa-minus"></i>
+                        </a>
+                        <a href="#" data-toggle="dispose">
+                            <i class="fa fa-times"></i>
+                        </a>*@
+                </div>
+            </div>
+            <div class="widget-body bordered-left ">
+
+                <div class="row ">
+
+                    <div class="col-sm-3" style="max-width:230px">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="时间范围" id="txtCreateTime">
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <span class="input-icon">
+                                <input type="text" class="form-control" placeholder="商品名称/商品代码" id="txtSearchKey">
+                                <i class="glyphicon glyphicon-search blue"></i>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-2">
+                        <div class="form-group">
+                            <select id="SelType" style="width:100%;" onchange="SearchOrderList()">
+                                <option value="0" selected="selected">分类</option>
+                                <option value="调料">调料</option>
+                                <option value="酒水">酒水</option>
+                                <option value="饮料">饮料</option>
+                                <option value="干货">干货</option>
+                            </select>
+                        </div>
+                    </div>
+                    @*<div class="col-sm-2 form-inline text-align-center" style="margin-top:7px">
+                            <div class="form-group">
+                                <label>
+                                    <input name="form-field-radio" type="radio" checked="checked" class="colored-primary" value="1">
+                                    <span class="text">创建时间 </span>
+                                </label>
+                            </div>
+
+                            <div class="form-group margin-left-10">
+                                <label>
+                                    <input name="form-field-radio" type="radio" class="colored-primary" value="2">
+                                    <span class="text">支付时间</span>
+                                </label>
+                            </div>
+                        </div>*@
+                    <div class="col-sm-2">
+                        <div class="form-group">
+                            <a href="javascript:void(0);" class="btn btn-primary shiny" onclick="BtnSearch()" id="BtnSearch" data-loading-text="加载中..."><i class="glyphicon glyphicon-search"></i>搜索</a>
+                        </div>
+                    </div>
+                </div>
+
+                <table class="table table-striped table-bordered table-hover " style="width:100%" id="tabOrder"></table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div style="text-align: left; border-top: 1px solid black; height: 50px;  position: fixed;  bottom: 0px;width:100%;padding:5px">
+    <a href="javascript:void(0);" class="btn btn-primary shiny btn-lg"  id="BtnAdd"   onclick="editProduct()"><i class="glyphicon glyphicon-plus"></i>新增</a>
+    <a href="javascript:void(0);" class="btn btn-primary shiny btn-lg" id="BtnAdd"><i class="glyphicon glyphicon-remove"></i>批量删除</a>
+</div>
+
+
+<style type="text/css">
+    .modal-dialog {
+        width: 780px;
+    }
+</style>
+
+<script src="~/Content/assets/js/datatable/jquery.datatables.min.js"></script>
+<script src="~/Content/assets/js/datatable/zeroclipboard.js"></script>
+<script src="~/Content/assets/js/datatable/datatables.bootstrap.min.js"></script>
+<script src="~/Content/assets/js/datatable/datatables-init.js"></script>
+<script src="~/Content/assets/js/bootbox/bootbox.js"></script>
+
+<script type="text/javascript" src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<script type="text/javascript" src="~/Content/assets/js/fuelux/spinbox/fuelux.spinbox.js"></script>
+<script type="text/javascript" src="~/Content/assets/js/validation/bootstrapvalidator.js"></script>
+
+<script src="~/Content/assets/js/datetime/moment.js"></script>
+<script src="~/Content/assets/js/datetime/daterangepicker.js"></script>
+<script src="~/Content/assets/js/datetime/daterangepicker.zh-CN.js"></script>
+
+
+<script type="text/javascript">
+    var tableOrder;
+    //时间戳转 字符串
+    function formatDate(date) {
+        if (date == undefined || date == "null") {
+            return "";
+        }
+        var d = new Date(parseInt(date.substring(6, date.length - 2)));
+        var dformat = [d.getFullYear(), d.getMonth() + 1, d.getDate()].join('-') + ' ' + [d.getHours(), d.getMinutes(), d.getSeconds()].join(':');
+        return dformat;
+    };
+
+    //订单创建时间
+    $('#txtCreateTime').daterangepicker({
+        applyClass: 'btn-sm btn-primary',
+        cancelClass: 'btn-sm btn-warning',
+        locale: {
+            applyLabel: '确认',
+            cancelLabel: '取消',
+            fromLabel: '起始时间',
+            toLabel: '结束时间',
+            customRangeLabel: '自定义',
+            firstDay: 1,
+            format: 'YYYY-MM-DD',
+            separator: '至',
+        },
+        ranges: {
+            //'最近1小时': [moment().subtract('hours',1), moment()],
+            '今日': [moment().startOf('day'), moment()],
+            '昨日': [moment().subtract('days', 1).startOf('day'), moment().subtract('days', 1).endOf('day')],
+            '最近7日': [moment().subtract('days', 6), moment()],
+            '最近30日': [moment().subtract('days', 29), moment()],
+            '本月': [moment().startOf("month"), moment().endOf("month")],
+            '上个月': [moment().subtract(1, "month").startOf("month"), moment().subtract(1, "month").endOf("month")]
+        },
+        opens: 'left',	// 日期选择框的弹出位置
+        showWeekNumbers: true,		// 是否显示第几周
+        startDate: moment().startOf('month'),
+
+        //startDate: [moment().subtract('hours', 1), moment()],
+        //  alwaysShowCalendars: true,
+        //timePicker: true,
+        //timePickerIncrement : 10,	// 时间的增量，单位为分钟
+        //timePicker12Hour : false,	// 是否使用12小时制来显示时间
+        //maxDate : moment(),			// 最大时间
+    })
+    .next().on('click', function () {
+        $(this).prev().focus();
+    });
+
+    //查询事件
+    function SearchOrderList() {
+        tableOrder.api().ajax.reload();
+    }
+
+    function BtnSearch() {
+        $("#BtnSearch").button('loading');
+        tableOrder.api().ajax.reload();
+    }
+
+    //ajax 加载产品数据
+    function GetOrderList() {
+        tableOrder = $('#tabOrder').dataTable({
+            processing: false,
+            serverSide: true,
+            searching: false,
+            ordering: false,
+            bLengthChange: false,
+            order: [1, 'asc'],
+            columnDefs: [{
+                orderable: false,//禁用排序
+                targets: [9]   //指定的列
+            }],
+            pagingType: "full_numbers",
+            language: {
+                emptyTable: "没有数据",
+                loadingRecords: "加载中...",
+                processing: "查询中...",
+                search: "检索:",
+                lengthMenu: "每页 _MENU_ 条",
+                zeroRecords: "没有数据",
+                paginate: {
+                    first: "第一页",
+                    last: "最后一页",
+                    next: "下一页",
+                    previous: "上一页"
+                },
+                info: "第 _PAGE_ 页 / 总 _PAGES_ 页, 共 _TOTAL_ 条数据",
+                infoEmpty: "",
+                infoFiltered: "(过滤总件数 _MAX_ 条)"
+            },
+            ajax: { //GetProductList
+                url: '@Url.Action("GetShopsByPage", "Home")',
+                type: "post",
+                dataSrc: "data",
+                data: function (d) {
+                    d.search = JSON.stringify(
+                        {
+                            KeyWhere: $("#txtSearchKey").val(),
+                            shopsType: $("#SelType option:selected").text(),
+                            querytime: $("#txtCreateTime").val(),
+                        });
+                }
+            },
+            columns: [
+                {
+                    data: "ID",
+                    title: "<label><input type=\"checkbox\"> <span class=\"text\"></span> </label>",
+                    render: function (data, type, full, meta) {
+                        return "<label><input type=\"checkbox\" value=" + full["ID"] + "> <span class=\"text\"></span> </label>";
+                    },
+                    width: "30px"
+                },
+                { data: "S_TYPE", title: "种类" },
+                { data: "S_CODE", title: "商品代码" },
+                { data: "S_NAME", title: "商品名称" },
+                { data: "S_SUMNUM", title: "数量" },
+                { data: "S_UNIT", title: "单位" },
+                { data: "S_INPRICE", title: "进货单价" },
+                { data: "S_SUMPRICE", title: "总价值",  },
+                { data: "S_OUTPRICE", title: "销售价" },
+                { data: "S_BRAND", title: "品牌", },
+                {
+                    data: "S_INDATE", title: "进货日期",
+                    render: function (data, type, full, meta) { return formatDate(data); }
+                },
+                {
+                    title: "操作",
+                    //className: "buttons-preview",
+                    render: function (data, type, full, meta) {
+                        return "  <a href=\"javascript:void(0);\" class=\"btn btn-default  btn-circle btn-xs\" onclick=\"GetOrderDetail(" + full["ID"] + ")\" title=\"进货\" ><i class=\"glyphicon glyphicon-plus\"></i></a> <a href=\"javascript:void(0);\" class=\"btn btn-default  btn-circle btn-xs\" onclick=\"GetOrderDetail(" + full["ID"] + ")\" title=\"出货\"><i class=\"glyphicon glyphicon-minus\"></i></a> <a href=\"javascript:void(0);\" class=\"btn btn-default  btn-circle btn-xs\" onclick=\"GetOrderDetail(" + full["ID"] + ")\" title=\"删除\"><i class=\"glyphicon glyphicon-remove\"></i></a>";
+                    }
+                }
+            ]
+        });
+    }
+
+    //页面初始化 加载JS
+    $(function () {
+        GetOrderList();
+        $('#tabOrder').on('xhr.dt', function () {
+            if ($("#BtnSearch")[0].innerText == "加载中...") {
+                $("#BtnSearch").button('reset');
+            }
+        });
+    });
+
+
+    //查看订单详情
+    function GetOrderDetail(orderId) {
+        $.post('@Url.Action("GetOrderById", "Order")', "id=" + orderId + "", function (data) {
+            bootbox.dialog({
+                message: data,
+                title: "订单详情",
+                className: "col-lg-12 col-sm-12 col-xs-12"
+            });
+        });
+    }
+
+
+        //弹出产品编辑
+    function editProduct(productid) {
+        $.post('@Url.Action("AddShops", "Home")', "id=" + productid + "", function (data) {
+            bootbox.dialog({
+                message: data,
+                title: "商品编辑",
+                onEscape: function (wd) {
+                    tableOrder.api().draw(productid == 0);
+                }
+            });
+        });
+    }
+
+
+</script>

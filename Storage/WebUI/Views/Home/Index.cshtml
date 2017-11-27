@@ -1,0 +1,229 @@
+﻿
+@{
+    ViewBag.Title = "Home";
+}
+
+<!-- Loading Container -->
+<div class="loading-container">
+    <div class="loader"></div>
+</div>
+<!--  /Loading Container -->
+<!-- Navbar -->
+<div class="navbar">
+    <div class="navbar-inner">
+        <div class="navbar-container">
+            <!-- Navbar Barnd -->
+            <div class="navbar-header pull-left">
+                <a href="#" class="navbar-brand">
+                    <small>
+                        <img src="~/Content/assets/img/logo.png" alt="" />
+                    </small>
+                </a>
+            </div>
+            <!-- /Navbar Barnd -->
+            <!-- Sidebar Collapse -->
+            <div class="sidebar-collapse" id="sidebar-collapse">
+                <i class="collapse-icon fa fa-bars"></i>
+            </div>
+            <!-- /Sidebar Collapse -->
+            <!-- Account Area and Settings --->
+            <div class="navbar-header pull-right">
+                <div class="navbar-account">
+                    <ul class="account-area">
+                        <li>
+                            <a class="login-area dropdown-toggle" data-toggle="dropdown">
+                                <section style="width:150px">
+                                    <h2><span class="profile"><span>当前用户:admin</span></span></h2>
+                                </section>
+                            </a>
+                            <!--Login Area Dropdown-->
+                            <ul class="pull-right dropdown-menu dropdown-arrow dropdown-login-area">
+                                <li class="username"><a> admin </a></li>
+                                <li class="email"><a>admin@live.com</a></li>
+                                <!--Avatar Area-->
+                                @*<li>
+                                        <div class="avatar-area">
+                                            <img src="~/Content/assets/img/avatars/adam-jansen.jpg" class="avatar">
+                                            <span class="caption">Change Photo</span>
+                                        </div>
+                                    </li>*@
+                                <!--Avatar Area-->
+                                @*<li class="edit">
+                                            <a href="profile.html" class="pull-left">Profile</a>
+                                            <a href="#" class="pull-right">Setting</a>
+                                    </li>*@
+                                <!--Theme Selector Area-->
+                                <li class="theme-area">
+                                    <ul class="colorpicker" id="skin-changer">
+                                        <li><a class="colorpick-btn" href="#" style="background-color:#5DB2FF;" rel="~/Content/assets/css/skins/blue.min.css"></a></li>
+                                        <li><a class="colorpick-btn" href="#" style="background-color:#2dc3e8;" rel="~/Content/assets/css/skins/azure.min.css"></a></li>
+                                        <li><a class="colorpick-btn" href="#" style="background-color:#03B3B2;" rel="~/Content/assets/css/skins/teal.min.css"></a></li>
+                                        <li><a class="colorpick-btn" href="#" style="background-color:#53a93f;" rel="~/Content/assets/css/skins/green.min.css"></a></li>
+                                        <li><a class="colorpick-btn" href="#" style="background-color:#FF8F32;" rel="~/Content/assets/css/skins/orange.min.css"></a></li>
+                                        <li><a class="colorpick-btn" href="#" style="background-color:#cc324b;" rel="~/Content/assets/css/skins/pink.min.css"></a></li>
+                                        <li><a class="colorpick-btn" href="#" style="background-color:#AC193D;" rel="~/Content/assets/css/skins/darkred.min.css"></a></li>
+                                        <li><a class="colorpick-btn" href="#" style="background-color:#8C0095;" rel="~/Content/assets/css/skins/purple.min.css"></a></li>
+                                        <li><a class="colorpick-btn" href="#" style="background-color:#0072C6;" rel="~/Content/assets/css/skins/darkblue.min.css"></a></li>
+                                        <li><a class="colorpick-btn" href="#" style="background-color:#585858;" rel="~/Content/assets/css/skins/gray.min.css"></a></li>
+                                        <li><a class="colorpick-btn" href="#" style="background-color:#474544;" rel="~/Content/assets/css/skins/black.min.css"></a></li>
+                                        <li><a class="colorpick-btn" href="#" style="background-color:#001940;" rel="~/Content/assets/css/skins/deepblue.min.css"></a></li>
+                                    </ul>
+                                </li>
+                                <!--/Theme Selector Area-->
+                                <li class="dropdown-footer">
+                                    <a href="#" onclick="UserOutLogin()">
+                                        退出登录
+                                    </a>
+                                </li>
+                            </ul>
+                            <!--/Login Area Dropdown-->
+                        </li>
+                        <!-- /Account Area -->
+                        <!--Note: notice that setting div must start right after account area list.
+                        no space must be between these elements-->
+                        <!-- Settings -->
+                    </ul>
+
+                    <!-- Settings -->
+                </div>
+            </div>
+            <!-- /Account Area and Settings -->
+        </div>
+    </div>
+</div>
+<!-- /Navbar -->
+<!-- Main Container -->
+<div class="main-container container-fluid">
+    <!-- Page Container -->
+    <div class="page-container">
+        <!-- Page Sidebar -->
+        <div class="page-sidebar" id="sidebar">
+            <!-- Page Sidebar Header-->
+            <div class="sidebar-header-wrapper">
+                @*<input type="text" class="searchinput" />
+                    <i class="searchicon fa fa-search"></i>
+                    <div class="searchhelper">Search Reports, Charts, Emails or Notifications</div>*@
+            </div>
+            <!-- /Page Sidebar Header -->
+            <!-- Sidebar Menu -->
+            <ul class="nav sidebar-menu">
+                <!--Dashboard-->
+                <li>
+                    <a href="javascript:void(0);" onclick="Navigation('@Url.Action("ShopsReport","Home")',this)">
+                        <i class="menu-icon glyphicon glyphicon-home"></i>
+                        <span class="menu-text"> 控制台 </span>
+                    </a>
+                </li>
+
+                <!--用户-->
+                <li>
+                    <a href="#" class="menu-dropdown">
+                        <i class="menu-icon glyphicon glyphicon-user"></i>
+                        <span class="menu-text"> 商品库存 </span>
+                        <i class="menu-expand"></i>
+                    </a>
+
+                    <ul class="submenu">
+                        <li>
+                            <a href="javascript:void(0);" onclick="Navigation('@Url.Action("ShopsView","Home")',this)">
+                                @*<i class="menu-icon fa fa-rocket"></i>*@
+                                <span class="menu-text">库存列表</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" onclick="Navigation('@Url.Action("InView","Home")',this)">
+                                @*<i class="menu-icon glyphicon glyphicon-stats"></i>*@
+                                <span class="menu-text">进货记录</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" onclick="Navigation('@Url.Action("OutView","Home")',this)">
+                                @*<i class="menu-icon typcn typcn-location-outline"></i>*@
+                                <span class="menu-text"> 出货记录</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+
+
+            </ul>
+            <!-- /Sidebar Menu -->
+        </div>
+        <!-- /Page Sidebar -->
+        <!-- Page Content -->
+
+
+        <div class="page-content">
+
+            <!-- Page Breadcrumb -->
+            <div class="page-breadcrumbs" style="box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.15);z-index:0">
+                <ul class="breadcrumb">
+                    <li>
+                        <ul class="breadcrumb" id="Ulbreadcrumb">
+                            <li>
+                                <i class="fa fa-home"></i>
+                                <a href="javascript:void(0);" onclick="Navigation('@Url.Action("ShopsReport","Home")',this)">控制台</a>
+                            </li>
+                        </ul>
+                    </li>
+                    @*<li>
+                            <a href="#">Tables</a>
+                        </li>
+                        <li class="active">Data Tables</li>*@
+                </ul>
+            </div>
+            <!-- /Page Breadcrumb -->
+            <div class="page-body">
+                <iframe style="width:100%;border:0" src="@Url.Action("ShopsReport","Home")" id="mainFrame" scrolling="auto" onload="changeFrameHeight()" frameborder="0"></iframe>
+            </div>
+        </div>
+        <!-- /Page Content -->
+    </div>
+    <!-- /Page Container -->
+    <!-- Main Container -->
+</div>
+
+<script type="text/javascript">
+
+    function changeFrameHeight() {
+        var ifm = document.getElementById("mainFrame");
+        ifm.height = document.documentElement.clientHeight-110;
+        ifm.width=document.documentElement.clientWidth;
+    }
+
+    window.onresize = function () {
+        changeFrameHeight();
+    }
+
+
+    function Navigation(pageUrl,obj)
+    {
+        var parent= $(obj).parents(".submenu");
+        if(parent!=undefined && parent.length!=undefined && parent.length>0)
+        {
+            var  prev=$(parent).prev()
+            $("#Ulbreadcrumb>li").not(":eq(0)").remove();
+
+            var lilevel1 = $("<li >"+$(parent).prev().text()+"</li>");  //创建DOM对象
+            var lilevel2 = $("<li class=\"active\">"+$(obj).text()+"</li>");  //创建DOM对象
+            $("#Ulbreadcrumb").append(lilevel1); //将$htmlLi追加到$ul元素的li列表
+            $("#Ulbreadcrumb").append(lilevel2); //将$htmlLi追加到$ul元素的li列表
+        }
+        else{
+            $("#Ulbreadcrumb>li").not(":eq(0)").remove();
+        }
+
+        var ifm = document.getElementById("mainFrame");
+        ifm.src = pageUrl;
+        return false;
+    }
+
+    function UserOutLogin()
+    {
+        $.post('@Url.Action("OutLogin", "Login")', function (data) {
+            window.location.href = "../Login/Index";
+        });
+    }
+</script>
+

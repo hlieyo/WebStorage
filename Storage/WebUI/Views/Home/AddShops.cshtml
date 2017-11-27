@@ -1,0 +1,167 @@
+﻿@model  Model.ST_Shops
+@{
+
+    Layout = null;
+    var ajaxOptions = new AjaxOptions
+    {
+        //UpdateTargetId = "myModal",
+        //OnBegin = "DeliverableEdit.onBegin",
+        //OnFailure = "DeliverableEdit.onFailure",
+        //OnSuccess = "DeliverableEdit.onSuccess",
+        OnComplete = "SubmitComplete",
+        HttpMethod = "Post"
+    };
+}
+
+
+@using (Ajax.BeginForm("SaveShops", "Home", null, ajaxOptions, new { @class = "form-horizontal ", id = "editForm" }))
+{
+    @Html.HiddenFor(p => p.ID);
+    <div id="myModal" class="well invoice-container">
+
+        <div class="form-group">
+            <label for="txtProductCode" class="col-sm-1 control-label no-padding-right">分类</label>
+            <div class="col-sm-3">
+                @Html.DropDownListFor(p => p.S_TYPE,
+                         new List<SelectListItem> {
+                                                new SelectListItem { Text = "调料", Value = "调料" },
+                                                new SelectListItem { Text = "酒水", Value = "酒水" },
+                                                new SelectListItem { Text = "饮料", Value = "饮料" },
+                                                new SelectListItem { Text = "干货", Value = "干货" },
+                         },
+                         new { @class = "form-control", @id = "drpType" })
+            </div>
+            <label for="txtName" class="col-sm-1 control-label no-padding-right">代码</label>
+            <div class="col-sm-3">
+                @Html.TextBoxFor(p => p.S_CODE, new { @class = "form-control", @id = "txtCODE", placeholder = "商品代码" })
+            </div>
+
+            <label for="txtSort" class="col-sm-1 control-label no-padding-right">名称</label>
+            <div class="col-sm-3">
+                @Html.TextBoxFor(p => p.S_NAME, new { @class = "form-control", @id = "txtName", placeholder = "商品代码" })
+            </div>
+        </div>
+ 
+
+        <div class="form-group">
+            <label for="txtSelPrice" class="col-sm-1 control-label no-padding-right">进货价</label>
+            <div class="col-sm-3">
+                @Html.TextBoxFor(p => p.S_INPRICE, new { @class = "form-control", @id = "txtINPRICE", placeholder = "进货价" })
+            </div>
+            <label for="txtFlowVal" class="col-sm-1 control-label no-padding-right">销售价</label>
+            <div class="col-sm-3">
+                @Html.TextBoxFor(p => p.S_OUTPRICE, new { @class = "form-control", @id = "txtOUTPRICE", placeholder = "销售价" })
+
+            </div>
+
+            <label for="txtMarPrice" class="col-sm-1 control-label no-padding-right">品牌</label>
+            <div class="col-sm-3">
+                @Html.TextBoxFor(p => p.S_BRAND, new { @class = "form-control", @id = "txtBRAND", placeholder = "品牌"})
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="txtFlowVal" class="col-sm-1 control-label no-padding-right">数量</label>
+            <div class="col-sm-3">
+                @Html.TextBoxFor(p => p.S_SUMNUM, new { @class = "form-control", @id = "txtSUMNUM", placeholder = "数量" })
+            </div>
+
+            <label for="txtPercentage2" class="col-sm-1 control-label no-padding-right">单位</label>
+            <div class="col-sm-3">
+                @Html.TextBoxFor(p => p.S_UNIT, new { @class = "form-control", @id = "txtUNIT", placeholder = "单位" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-10">
+                <button type='button' class="btn btn-danger " data-dismiss="modal" aria-hidden="true">取消</button>
+                <button type="button" class="btn btn-success" id="btnSave" onclick="Sava()">保存</button>
+            </div>
+        </div>
+    </div>
+}
+
+<script type="text/javascript">
+    function Sava() {
+        var bootstrapValidator = $("#editForm").data('bootstrapValidator').validate();
+        if (bootstrapValidator.isValid()) {
+            $("#editForm").submit();
+        }
+        else {
+        }
+    }
+
+    //Form 提交完成后回发事件
+    function SubmitComplete(data) {
+        if (data != undefined) {
+            if (data.status == "200" && data.responseJSON == "success") {
+                swal("商品编辑!", "产品信息保存成功!", "success");
+            }
+            else {
+                swal("商品编辑!", data.responseJSON, "error");
+            }
+        }
+    }
+
+    $(function () {
+        $('.spinbox').spinbox();
+        $("input").on('keypress',  //所有input标签回车无效，当然，可以根据需求自定义
+            function (e) {
+                var key = window.event ? e.keyCode : e.which;
+                if (key.toString() == "13") {
+                    return false;
+                }
+            }
+        );
+
+        $('#editForm').bootstrapValidator({
+            message: '值不能为空',
+            feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                S_CODE: {
+                    validators: {
+                        notEmpty: {
+                            message: '编码不能为空'
+                        }
+                    }
+                },
+                S_NAME: {
+                    validators: {
+                        notEmpty: {
+                            message: '名称不能为空'
+                        }
+                    }
+                },
+                S_INPRICE: {
+                    validators: {
+                        regexp: {
+                            regexp: /^\d+(\.\d{1,2})?$/,
+                            message: '进货价输入不正确'
+                        }
+                    }
+                },
+                S_OUTPRICE: {
+                    validators: {
+                        regexp: {
+                            regexp: /^\d+(\.\d{1,2})?$/,
+                            message: '销售价输入不正确'
+                        }
+                    }
+                },
+                S_SUMNUM: {
+                    validators: {
+                        regexp: {
+                            regexp: /^[0-9]+$/,
+                            message: '数量输入不正确'
+                        }
+                    }
+                }
+            }
+        })
+    })
+     
+</script>
