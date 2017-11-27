@@ -58,7 +58,7 @@
         }
         $.post('@Url.Action("Userlogin", "Login")', "userName=" + userName + "&passWord=" + passWord + "&validateCode=" + validateCode, function (data,textStatus, jqXHR) {
             if (data == "success") {
-                window.location.href ='@Url.Action("Main", "AdminMain")';
+                window.location.href ='@Url.Action("Index", "Home")';
             }
             else {
                 swal("", data, "error");

@@ -25,7 +25,9 @@ namespace Logic
         public static bool SaveInStorage(ST_InStorage model)
         {
             model.EntityState = EntityState.Added;
-            return DBHelper.Save(model).ResultStatus;
+            var sqlStr = new StringBuilder();
+            sqlStr.Append(" UPDATE [ST_Shops] SET S_InPrice=" + model.I_PRICE + ",S_SumNum+=" + model.I_NUM + ",S_SumPrice+=" + model.I_SUMPRICE + ",S_InDate=getdate()  where ID=" + model.I_SHOPSID);
+            return DBHelper.Save(model, new List<string> { sqlStr.ToString() }).ResultStatus;
         }
 
         /// <summary>
@@ -36,7 +38,9 @@ namespace Logic
         public static bool SaveOutStorage(ST_OutStorage model)
         {
             model.EntityState = EntityState.Added;
-            return DBHelper.Save(model).ResultStatus;
+            var sqlStr = new StringBuilder();
+            sqlStr.Append(" UPDATE [ST_Shops] SET  S_SumNum-=" + model.O_NUM + ",S_SumPrice-=" + model.O_SUMPRICE + ",S_OutDate=getdate() where ID=" + model.O_SHOPSID);
+            return DBHelper.Save(model, new List<string> { sqlStr.ToString() }).ResultStatus;
         }
 
 
@@ -50,6 +54,16 @@ namespace Logic
             return DBHelper.Save(model).ResultStatus;
         }
 
+
+        /// <summary>
+        /// 获取商品信息
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
+        public static ST_Shops GetShopsById(string Id)
+        {
+            return DBHelper.ExecuteDataTableSql(" SELECT * FROM ST_Shops WHERE ID=@ID", new SqlParameter[] { new SqlParameter() { ParameterName = "@ID", SqlDbType = SqlDbType.Int, Value = Int32.Parse(Id) } }).ToEntity<ST_Shops>();
+        }
 
         /// <summary>
         /// 用户登陆  查询用户

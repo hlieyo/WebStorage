@@ -14,28 +14,83 @@ namespace WebUI.Controllers
     {
         public ActionResult Index()
         {
+            if(Session["sysAdmin"]==null)
+            {
+                Response.RedirectToRoute(new { controller = "Login", action = "Index" });
+            }
             return View();
         }
         public ActionResult InView()
         {
+            if (Session["sysAdmin"] == null)
+            {
+                Response.RedirectToRoute(new { controller = "Login", action = "Index" });
+            }
             return View();
         }
         public ActionResult OutView()
         {
+            if (Session["sysAdmin"] == null)
+            {
+                Response.RedirectToRoute(new { controller = "Login", action = "Index" });
+            }
             return View();
         }
         public ActionResult ShopsView()
         {
+            if (Session["sysAdmin"] == null)
+            {
+                Response.RedirectToRoute(new { controller = "Login", action = "Index" });
+            }
             return View();
         }
         public ActionResult AddShops()
         {
+            if (Session["sysAdmin"] == null)
+            {
+                Response.RedirectToRoute(new { controller = "Login", action = "Index" });
+            }
             return View();
         }
         public ActionResult ShopsReport()
         {
+            if (Session["sysAdmin"] == null)
+            {
+                Response.RedirectToRoute(new { controller = "Login", action = "Index" });
+            }
             return View();
         }
+
+        public ActionResult AddInStorage(string shopsId)
+        {
+            var item = St_LogicHelper.GetShopsById(shopsId);
+            if(item==null)
+            {
+                return null;
+            }
+            var model = new ST_InStorage()
+            {
+                I_SHOPSID = item.ID,
+                I_PRICE = item.S_INPRICE
+            };
+            return View(model);
+        }
+
+        public ActionResult AddOutStorage(string shopsId)
+        {
+            var item = St_LogicHelper.GetShopsById(shopsId);
+            if (item == null)
+            {
+                return null;
+            }
+            var model = new ST_OutStorage()
+            {
+                O_SHOPSID = item.ID,
+                O_PRICE = item.S_OUTPRICE
+            };
+            return View(model);
+        }
+
 
         /// <summary>
         /// 分页获取商品数据
@@ -137,6 +192,37 @@ namespace WebUI.Controllers
             }
             return result;
         }
+
+        /// <summary>
+        /// 保存进货数据
+        /// </summary>
+        /// <param name="inStorage"></param>
+        /// <returns></returns>
+        public JsonResult SaveInStorage(ST_InStorage inStorage)
+        {
+            var result = new JsonResult();
+            if (inStorage == null)
+            {
+                result.Data = "获取进货信息失败";
+            }
+            else
+            {
+                inStorage.I_ADDTIME = DateTime.Now;
+                inStorage.I_ADDUSER = ((ST_SysAdmin)Session["sysAdmin"]).ID.ToString();
+                inStorage.I_SUMPRICE = inStorage.I_NUM * inStorage.I_PRICE;
+
+                if (St_LogicHelper.SaveInStorage(inStorage))
+                {
+                    result.Data = "success";
+                }
+                else
+                {
+                    result.Data = "进货信息保存失败";
+                }
+            }
+            return result;
+        }
+      
 
 
     }

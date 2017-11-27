@@ -33,7 +33,15 @@ namespace Model
             if (row.Table.Columns.Contains("O_SumPrice"))
                 if (row["O_SumPrice"] != DBNull.Value) this.O_SUMPRICE = Convert.ToDecimal(row["O_SumPrice"]);
 
+            if (row.Table.Columns.Contains("O_ShopsId"))
+                if (row["O_ShopsId"] != DBNull.Value) this.O_SHOPSID = Convert.ToInt32(row["O_ShopsId"]);
+
         }
+
+        /// <summary>
+        /// 商品ID
+        /// </summary>
+        public int O_SHOPSID { get; set; }
 
         /// <summary>
         ///

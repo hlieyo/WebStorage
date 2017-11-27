@@ -32,7 +32,15 @@ namespace Model
             if (row.Table.Columns.Contains("ID"))
                 if (row["ID"] != DBNull.Value) this.ID = Convert.ToInt32(row["ID"]);
 
+            if (row.Table.Columns.Contains("I_SHOPSID"))
+                if (row["I_SHOPSID"] != DBNull.Value) this.I_SHOPSID = Convert.ToInt32(row["I_SHOPSID"]);
+
         }
+
+        /// <summary>
+        /// 商品ID
+        /// </summary>
+        public  int I_SHOPSID { get; set; }
 
         /// <summary>
         ///入库时间

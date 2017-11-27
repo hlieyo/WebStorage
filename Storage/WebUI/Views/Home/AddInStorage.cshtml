@@ -1,0 +1,124 @@
+﻿@model  Model.ST_InStorage
+@{
+
+    Layout = null;
+    var ajaxOptions = new AjaxOptions
+    {
+        OnComplete = "SubmitComplete",
+        HttpMethod = "Post"
+    };
+}
+
+
+@using (Ajax.BeginForm("SaveInStorage", "Home", null, ajaxOptions, new { @class = "form-horizontal ", id = "editForm" }))
+{
+    @Html.HiddenFor(p => p.ID);
+    <div id="myModal" class="well invoice-container">
+
+        <div class="form-group">
+           
+            <label for="txtName" class="col-sm-2 control-label no-padding-right">进货数量</label>
+            <div class="col-sm-3">
+                @Html.TextBoxFor(p => p.I_NUM, new { @class = "form-control", @id = "txtI_Num", placeholder = "进货数量" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label for="txtSelPrice" class="col-sm-2 control-label no-padding-right">进货单价</label>
+            <div class="col-sm-3">
+                @Html.TextBoxFor(p => p.I_PRICE, new { @class = "form-control", @id = "txtI_PRICE", placeholder = "进货单价" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="txtFlowVal" class="col-sm-2 control-label no-padding-right">进货总额</label>
+            <div class="col-sm-3">
+                <label class="control-label">@Model.I_SUMPRICE</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-10">
+                <button type='button' class="btn btn-danger " data-dismiss="modal" aria-hidden="true">取消</button>
+                <button type="button" class="btn btn-success" id="btnSave" onclick="Sava()">保存</button>
+            </div>
+        </div>
+    </div>
+}
+
+<script type="text/javascript">
+    function Sava() {
+        var bootstrapValidator = $("#editForm").data('bootstrapValidator').validate();
+        if (bootstrapValidator.isValid()) {
+            $("#editForm").submit();
+        }
+        else {
+        }
+    }
+
+    //Form 提交完成后回发事件
+    function SubmitComplete(data) {
+        if (data != undefined) {
+            if (data.status == "200" && data.responseJSON == "success") {
+                swal("商品编辑!", "产品信息保存成功!", "success");
+            }
+            else {
+                swal("商品编辑!", data.responseJSON, "error");
+            }
+        }
+    }
+
+    $(function () {
+        $("input").on('keypress',  //所有input标签回车无效，当然，可以根据需求自定义
+            function (e) {
+                var key = window.event ? e.keyCode : e.which;
+                if (key.toString() == "13") {
+                    return false;
+                }
+            }
+        );
+
+        $('#editForm').bootstrapValidator({
+            message: '值不能为空',
+            feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                I_NUM: {
+                    validators: {
+                        notEmpty: {
+                            message: '进货数量不能为空'
+                        }
+                    }
+                },
+                I_PRICE: {
+                    validators: {
+                        notEmpty: {
+                            message: '进货单价不能为空'
+                        }
+                    }
+                },
+                I_NUM: {
+                    validators: {
+                        regexp: {
+                            regexp: /^[0-9]+$/,
+                            message: '进货数量输入不正确'
+                        }
+                    }
+                },
+                I_PRICE: {
+                    validators: {
+                        regexp: {
+                            regexp: /^\d+(\.\d{1,2})?$/,
+                            message: '进货单价输入不正确'
+                        }
+                    }
+                }
+            }
+        })
+    })
+
+</script>
