@@ -12,6 +12,7 @@ namespace WebUI.Controllers
 {
     public class HomeController : Controller
     {
+        #region  View
         public ActionResult Index()
         {
             if(Session["sysAdmin"]==null)
@@ -20,6 +21,10 @@ namespace WebUI.Controllers
             }
             return View();
         }
+        /// <summary>
+        /// 进货列表
+        /// </summary>
+        /// <returns></returns>
         public ActionResult InView()
         {
             if (Session["sysAdmin"] == null)
@@ -28,6 +33,10 @@ namespace WebUI.Controllers
             }
             return View();
         }
+        /// <summary>
+        /// 出货列表
+        /// </summary>
+        /// <returns></returns>
         public ActionResult OutView()
         {
             if (Session["sysAdmin"] == null)
@@ -36,6 +45,10 @@ namespace WebUI.Controllers
             }
             return View();
         }
+        /// <summary>
+        /// 库存
+        /// </summary>
+        /// <returns></returns>
         public ActionResult ShopsView()
         {
             if (Session["sysAdmin"] == null)
@@ -44,6 +57,10 @@ namespace WebUI.Controllers
             }
             return View();
         }
+        /// <summary>
+        /// 跳转到添加商品页面
+        /// </summary>
+        /// <returns></returns>
         public ActionResult AddShops()
         {
             if (Session["sysAdmin"] == null)
@@ -52,6 +69,10 @@ namespace WebUI.Controllers
             }
             return View();
         }
+        /// <summary>
+        /// 数据报表
+        /// </summary>
+        /// <returns></returns>
         public ActionResult ShopsReport()
         {
             if (Session["sysAdmin"] == null)
@@ -61,6 +82,11 @@ namespace WebUI.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 添加进货
+        /// </summary>
+        /// <param name="shopsId"></param>
+        /// <returns></returns>
         public ActionResult AddInStorage(string shopsId)
         {
             var item = St_LogicHelper.GetShopsById(shopsId);
@@ -75,6 +101,11 @@ namespace WebUI.Controllers
             };
             return View(model);
         }
+        /// <summary>
+        /// 添加出货
+        /// </summary>
+        /// <param name="shopsId"></param>
+        /// <returns></returns>
 
         public ActionResult AddOutStorage(string shopsId)
         {
@@ -90,7 +121,7 @@ namespace WebUI.Controllers
             };
             return View(model);
         }
-
+        #endregion
 
         /// <summary>
         /// 分页获取商品数据
@@ -121,7 +152,7 @@ namespace WebUI.Controllers
             }
 
             var SearchStr = new StringBuilder();
-            SearchStr.Append(" 1=1");
+            SearchStr.Append(" S_DelFlg=0 ");
             if (!string.IsNullOrWhiteSpace(querytime))
             {
                 var time = querytime.Split(new char[] { '至' });
@@ -154,7 +185,6 @@ namespace WebUI.Controllers
             result.Data = resultObj;
             return result;
         }
-
 
         /// <summary>
         /// 保存产品
@@ -198,6 +228,7 @@ namespace WebUI.Controllers
         /// </summary>
         /// <param name="inStorage"></param>
         /// <returns></returns>
+        [HttpPost]
         public JsonResult SaveInStorage(ST_InStorage inStorage)
         {
             var result = new JsonResult();
@@ -210,7 +241,6 @@ namespace WebUI.Controllers
                 inStorage.I_ADDTIME = DateTime.Now;
                 inStorage.I_ADDUSER = ((ST_SysAdmin)Session["sysAdmin"]).ID.ToString();
                 inStorage.I_SUMPRICE = inStorage.I_NUM * inStorage.I_PRICE;
-
                 if (St_LogicHelper.SaveInStorage(inStorage))
                 {
                     result.Data = "success";
@@ -222,7 +252,74 @@ namespace WebUI.Controllers
             }
             return result;
         }
-      
+
+        /// <summary>
+        /// 保存进货数据
+        /// </summary>
+        /// <param name="inStorage"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public JsonResult SaveOutStorage(ST_OutStorage outStorage)
+        {
+            var result = new JsonResult();
+            if (outStorage == null)
+            {
+                result.Data = "获取出货信息失败";
+            }
+            else
+            {
+                outStorage.O_ADDTIME = DateTime.Now;
+                outStorage.O_ADDUSER = ((ST_SysAdmin)Session["sysAdmin"]).ID.ToString();
+                outStorage.O_SUMPRICE = outStorage.O_NUM * outStorage.O_PRICE;
+
+                if (St_LogicHelper.SaveOutStorage(outStorage))
+                {
+                    result.Data = "success";
+                }
+                else
+                {
+                    result.Data = "出货信息保存失败";
+                }
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// 删除商品
+        /// </summary>
+        /// <param name="inStorage"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public JsonResult DeleteShops(string parameter)
+        {
+            var result = new JsonResult();
+            if (parameter == null || string.IsNullOrWhiteSpace(parameter))
+            {
+                result.Data = "删除商品信息获取失败";
+            }
+            else
+            {
+                try
+                {
+
+                    JObject obj = JObject.Parse(parameter);
+                    string idStr = obj["IdStr"] == null ? "" : obj["IdStr"].ToString();
+                    var shopsId = "";
+                    if (!string.IsNullOrWhiteSpace(idStr))
+                    {
+                        shopsId= idStr.Remove(idStr.Length - 1, 1);
+                    }
+                    var listId = shopsId.Split(new char[] { ',' }).ToList();
+                    result.Data = St_LogicHelper.DeleteShops(listId);
+                }
+                catch (Exception ex)
+                {
+                    result.Data = false;
+                }
+            }
+            return result;
+        }
+
 
 
     }

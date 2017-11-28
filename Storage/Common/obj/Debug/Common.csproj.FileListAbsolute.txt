@@ -1,6 +1,5 @@
 E:\WebStorage\Storage\Common\bin\Debug\Common.dll
 E:\WebStorage\Storage\Common\bin\Debug\Common.pdb
-E:\WebStorage\Storage\Common\obj\Debug\Common.csprojResolveAssemblyReference.cache
 E:\WebStorage\Storage\Common\obj\Debug\Common.csproj.CoreCompileInputs.cache
 E:\WebStorage\Storage\Common\obj\Debug\Common.dll
 E:\WebStorage\Storage\Common\obj\Debug\Common.pdb

@@ -1,0 +1,14 @@
+----------------------------------2017/11/28 10:57:05--------------------------------------
+System.Data.SqlClient.SqlException (0x80131904): '=' 附近有语法错误。
+   在 Foundation.DataProvider.SqlClientSqlCommandSet.ExecuteNonQuery()
+   在 Foundation.DataProvider.DBHelper.ExceSave(Boolean isInnerTran, CustomResult result, SqlTransaction tran, List`1 entityList, List`1 lstSql)
+ClientConnectionId:f6429eb6-9ee1-44f4-9201-ba4dfb1fddad
+Error Number:102,State:1,Class:15
+
+----------------------------------2017/11/28 10:57:18--------------------------------------
+System.Data.SqlClient.SqlException (0x80131904): '=' 附近有语法错误。
+   在 Foundation.DataProvider.SqlClientSqlCommandSet.ExecuteNonQuery()
+   在 Foundation.DataProvider.DBHelper.ExceSave(Boolean isInnerTran, CustomResult result, SqlTransaction tran, List`1 entityList, List`1 lstSql)
+ClientConnectionId:f6429eb6-9ee1-44f4-9201-ba4dfb1fddad
+Error Number:102,State:1,Class:15
+

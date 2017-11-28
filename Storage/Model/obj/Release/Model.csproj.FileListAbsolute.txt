@@ -1,0 +1,6 @@
+E:\WebStorage\Storage\Model\bin\Release\Model.dll
+E:\WebStorage\Storage\Model\bin\Release\Model.pdb
+E:\WebStorage\Storage\Model\bin\Release\Foundation.Cls.dll
+E:\WebStorage\Storage\Model\obj\Release\Model.csproj.CoreCompileInputs.cache
+E:\WebStorage\Storage\Model\obj\Release\Model.dll
+E:\WebStorage\Storage\Model\obj\Release\Model.pdb

@@ -1,4 +1,5 @@
-﻿using Foundation.DataProvider;
+﻿using Foundation.Cls;
+using Foundation.DataProvider;
 using Model;
 using System;
 using System.Collections.Generic;
@@ -26,7 +27,7 @@ namespace Logic
         {
             model.EntityState = EntityState.Added;
             var sqlStr = new StringBuilder();
-            sqlStr.Append(" UPDATE [ST_Shops] SET S_InPrice=" + model.I_PRICE + ",S_SumNum+=" + model.I_NUM + ",S_SumPrice+=" + model.I_SUMPRICE + ",S_InDate=getdate()  where ID=" + model.I_SHOPSID);
+            sqlStr.Append(" UPDATE [ST_Shops] SET  S_SumNum+=" + model.I_NUM + ",S_SumPrice+=" + model.I_SUMPRICE + ",S_InDate=getdate()  where ID=" + model.I_SHOPSID);
             return DBHelper.Save(model, new List<string> { sqlStr.ToString() }).ResultStatus;
         }
 
@@ -110,9 +111,39 @@ namespace Logic
         /// <returns></returns>
         public static List<ST_Shops> SelectByPagesShops(int pageSize, int pageindex, string where, out int recordCount)
         {
-            return PageHelper.SelectByPage("ST_Shops", "*", "S_InDate", true, pageSize, pageindex, where, "", "", out recordCount).ToList<ST_Shops>();
+            return PageHelper.SelectByPage("ST_Shops", "*", "S_Name", true, pageSize, pageindex, where, "", "", out recordCount).ToList<ST_Shops>();
         }
 
+
+        /// <summary>
+        /// 作废商品
+        /// </summary>
+        /// <param name="shopsId"></param>
+        /// <returns></returns>
+        public static bool DeleteShops(List<string> listId)
+        {
+            var listSql = new List<string>();
+
+            foreach(var item in listId)
+            {
+                listSql.Add(" update [ST_Shops] set [S_DelFlg]=1 where id=" + item);
+            }
+            //DataTable tblDatas = new DataTable("shops");
+            //tblDatas.Columns.Add("ID", Type.GetType("System.Int32"));
+            //tblDatas.Columns.Add("S_DelFlg", Type.GetType("System.Boolean"));
+
+            //foreach (var id in listId)
+            //{
+            //    DataRow newRow;
+            //    newRow = tblDatas.NewRow();
+            //    newRow["ID"] = Int32.Parse(id);
+            //    newRow["S_DelFlg"] = true;
+            //    tblDatas.Rows.Add(newRow);
+            //}
+            //DBHelper.UpdateDataSet(tblDatas);
+
+           return DBHelper.Save(new ST_Shops(), listSql).ResultStatus;
+        }
 
     }
 }

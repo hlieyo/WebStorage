@@ -89,8 +89,10 @@
 
 <style type="text/css">
     .modal-dialog {
-        width: 780px;
+        width: 480px;
     }
+ 
+
 </style>
 
 <script src="~/Content/assets/js/datatable/jquery.datatables.min.js"></script>
@@ -171,6 +173,7 @@
     //ajax 加载产品数据
     function GetOrderList() {
         tableOrder = $('#tabOrder').dataTable({
+            iDisplayLength: 5,
             processing: false,
             serverSide: true,
             searching: false,
@@ -310,6 +313,7 @@
             bootbox.dialog({
                 message: data,
                 title: "商品进货",
+                className: "modal-darkorange",
                 onEscape: function (wd) {
                     tableOrder.api().draw(productid == 0);
                 }
@@ -362,9 +366,9 @@
                if (isConfirm) {
                    var parameterObj = new Object();
                    parameterObj.IdStr = productId;
-                   $.post('@Url.Action("DeleteProduct", "Product")', { "parameter": JSON.stringify(parameterObj) }, function (data) {
+                   $.post('@Url.Action("DeleteShops", "Home")', { "parameter": JSON.stringify(parameterObj) }, function (data) {
                        if (data == true) {
-                           productTable.api().draw(false);
+                           tableOrder.api().draw(false);
                            swal("", "删除成功!", "success");
                        }
                        else {

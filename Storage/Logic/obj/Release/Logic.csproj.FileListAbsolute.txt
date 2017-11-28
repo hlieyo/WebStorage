@@ -1,0 +1,10 @@
+E:\WebStorage\Storage\Logic\bin\Release\Logic.dll
+E:\WebStorage\Storage\Logic\bin\Release\Logic.pdb
+E:\WebStorage\Storage\Logic\bin\Release\Foundation.Cls.dll
+E:\WebStorage\Storage\Logic\bin\Release\Foundation.DataProvider.dll
+E:\WebStorage\Storage\Logic\bin\Release\Model.dll
+E:\WebStorage\Storage\Logic\bin\Release\Model.pdb
+E:\WebStorage\Storage\Logic\obj\Release\Logic.csprojResolveAssemblyReference.cache
+E:\WebStorage\Storage\Logic\obj\Release\Logic.csproj.CoreCompileInputs.cache
+E:\WebStorage\Storage\Logic\obj\Release\Logic.dll
+E:\WebStorage\Storage\Logic\obj\Release\Logic.pdb
