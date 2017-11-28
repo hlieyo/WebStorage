@@ -239,7 +239,7 @@ namespace WebUI.Controllers
             else
             {
                 inStorage.I_ADDTIME = DateTime.Now;
-                inStorage.I_ADDUSER = ((ST_SysAdmin)Session["sysAdmin"]).ID.ToString();
+                inStorage.I_ADDUSER = ((ST_SysAdmin)Session["sysAdmin"]).UserName;
                 inStorage.I_SUMPRICE = inStorage.I_NUM * inStorage.I_PRICE;
                 if (St_LogicHelper.SaveInStorage(inStorage))
                 {
@@ -269,7 +269,7 @@ namespace WebUI.Controllers
             else
             {
                 outStorage.O_ADDTIME = DateTime.Now;
-                outStorage.O_ADDUSER = ((ST_SysAdmin)Session["sysAdmin"]).ID.ToString();
+                outStorage.O_ADDUSER = ((ST_SysAdmin)Session["sysAdmin"]).UserName;
                 outStorage.O_SUMPRICE = outStorage.O_NUM * outStorage.O_PRICE;
 
                 if (St_LogicHelper.SaveOutStorage(outStorage))
@@ -321,6 +321,70 @@ namespace WebUI.Controllers
         }
 
 
+        /// <summary>
+        /// 分页获取进货数据
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public JsonResult GetInStorageByPage()
+        {
+            var result = new JsonResult();
+            var start = Request.Form["start"]; //开始索引
+            var length = Request.Form["length"]; //页大小
+            var draw = Request.Form["draw"]; //原值返回
+            var search = Request.Form["search"]; //自定义查询条件
+
+            var shopsType = ""; //订单类型
+            var queryStr = ""; //搜索关键字
+            var querytime = "";
+            var pageIndex = (int)Math.Ceiling(Convert.ToInt32(start) * 1.0 / 10);
+
+            if (!string.IsNullOrWhiteSpace(search))
+            {
+                JObject obj = JObject.Parse(search);
+                if (obj != null)
+                {
+                    queryStr = obj["KeyWhere"] == null ? "" : obj["KeyWhere"].ToString();
+                    shopsType = obj["shopsType"] == null ? "" : obj["shopsType"].ToString();
+                    querytime = obj["querytime"] == null ? "" : obj["querytime"].ToString();
+                }
+            }
+
+            var SearchStr = new StringBuilder();
+            SearchStr.Append(" 1=1");
+
+            if (!string.IsNullOrWhiteSpace(querytime))
+            {
+                var time = querytime.Split(new char[] { '至' });
+                if (time.Count() == 2)
+                {
+                    SearchStr.Append(" and ST_InStorage.I_AddTime>='" + DateTime.Parse(time[0] + " 00:00:00") + "'");
+                    SearchStr.Append(" and ST_InStorage.I_AddTime<='" + DateTime.Parse(time[1] + " 23:59:59") + "'");
+                }
+            }
+            if (!string.IsNullOrWhiteSpace(queryStr))
+            {
+                SearchStr.Append(" and (ST_Shops.S_Code like '%" + queryStr + "%'  or  ST_Shops.S_Name like '%" + queryStr + "%')");
+            }
+
+            if (!string.IsNullOrWhiteSpace(shopsType) && !shopsType.Equals("分类"))
+            {
+                SearchStr.Append(" and  ST_Shops.S_Type='" + shopsType + "'");
+            }
+
+            var pageCount = 0;
+            var dt = St_LogicHelper.SelectByPages(" ST_Shops,ST_InStorage", "ST_Shops.S_TYPE,ST_Shops.S_CODE,ST_Shops.S_NAME,ST_Shops.S_BRAND,ST_Shops.S_UNIT,ST_InStorage.I_NUM,ST_InStorage.I_PRICE,ST_InStorage.I_SUMPRICE,ST_InStorage.I_ADDUSER, ST_InStorage.I_ADDTIME", "ST_InStorage.I_AddTime", true, Convert.ToInt32(length), pageIndex + 1, SearchStr.ToString(), "ID,i_shopsid", "", out pageCount);
+            
+            var resultObj = new
+            {
+                draw = Convert.ToInt32(draw),
+                recordsTotal = pageCount,
+                recordsFiltered = pageCount,
+                data = dt
+            };
+            result.Data = resultObj;
+            return result;
+        }
 
     }
 }

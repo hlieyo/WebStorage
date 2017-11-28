@@ -42,12 +42,12 @@ namespace WebUI.Controllers
         public JsonResult Userlogin(string userName, string passWord, string validateCode)
         {
             var result = new JsonResult();
-            var cookie = CookieService.GetCookie("Code");
-            if (!validateCode.Equals(cookie))
-            {
-                result.Data = "验证码验证错误";
-                return result;
-            }
+            //var cookie = CookieService.GetCookie("Code");
+            //if (!validateCode.Equals(cookie))
+            //{
+            //    result.Data = "验证码验证错误";
+            //    return result;
+            //}
 
             ST_SysAdmin user = new ST_SysAdmin() { UserName = userName, UserPwd = PassWordService.MD5(passWord) };
             var loginUser = St_LogicHelper.UserLogin(user);

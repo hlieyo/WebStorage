@@ -94,10 +94,9 @@ namespace Logic
         /// <param name="recordCount">返回的总记录数</param>
         /// <param name="innwhere">关联附加条件</param>
         /// <returns></returns>
-        public DataTable SelectByPages(string tableName, string field, string orderfield, string orderType, int pageSize, int pageindex, string where, string innerFields, string innwhere, out int recordCount)
+        public static DataTable SelectByPages(string tableName, string field, string orderfield, bool orderType, int pageSize, int pageindex, string where, string innerFields, string innwhere, out int recordCount)
         {
-            var type = orderType == "1";
-            return PageHelper.SelectByPage(tableName, field, orderfield, type, pageSize, pageindex, where, innerFields, innwhere, out recordCount);
+            return PageHelper.SelectByPage(tableName, field, orderfield, orderType, pageSize, pageindex, where, innerFields, innwhere, out recordCount);
         }
 
 
