@@ -1,4 +1,4 @@
-﻿
+﻿@model  Model.ST_SysAdmin
 @{
     ViewBag.Title = "登陆";
 }
@@ -8,26 +8,26 @@
         <div class="loginbox bg-white">
             <div class="loginbox-title"></div>
             <div class="loginbox-textbox">
-                <input type="text" class="form-control" placeholder="用户名" id="txtUserName" />
+                @Html.TextBoxFor(p => p.UserName, new { @class = "form-control", @id = "txtUserName", placeholder = "用户名" })
             </div>
             <div class="loginbox-textbox">
-                <input type="password" class="form-control" placeholder="密   码" id="txtPassWord" />
+                @Html.PasswordFor(p => p.UserPwd, new { @class = "form-control", @id = "txtPassWord", placeholder = "密   码" })
             </div>
             <div class="loginbox-textbox">
 
-                <div class="row">
-                    <div class="col-lg-7 col-sm-7 col-xs-7 padding-right-10">
-                        <input type="text" class="form-control" placeholder="验证码" id="txtValidateCode" />
-                    </div>
-                    <div class="col-lg-5 col-sm-5 col-xs-5 no-padding-left">
-                        <img alt="" id="imgCode" width="100" height="30" onclick="GetLoginCode()" src="@Url.Action("GetValidateCode", "Login",new { id = 1 })" />
-                    </div>
+                <div class="form-group">
+                    <input type="button" class="btn btn-primary btn-block" value="登  录" onclick="UserLogin()" style="width:130px">
+
+                    <label style="margin-left:10px">
+                        @Html.CheckBoxFor(p => p.IsRemember, new { @class = "form-control", @id = "txtIsRemember", placeholder = "密   码" })
+                        <input type="checkbox">
+                        <span class="text">记住我</span>
+                    </label>
                 </div>
-
             </div>
-            <div class="loginbox-submit">
+            @*<div class="loginbox-submit">
                 <input type="button" class="btn btn-primary btn-block" value="登  录" onclick="UserLogin()">
-            </div>
+            </div>*@
         </div>
         <div class="logobox">
         </div>
@@ -43,7 +43,7 @@
         var userName = $("#txtUserName").val();
         var passWord = $("#txtPassWord").val();
         var validateCode = $("#txtValidateCode").val();
-
+        var IsRemember = $("#txtIsRemember").is(':checked');
         if (userName == null || userName == "") {
             swal("", "用户名不能为空", "error");
             return;
@@ -52,11 +52,11 @@
             swal("", "密码不能为空", "error");
             return;
         }
-        if (validateCode == null || validateCode == "") {
-            swal("", "验证码不能为空", "error");
-            return;
-        }
-        $.post('@Url.Action("Userlogin", "Login")', "userName=" + userName + "&passWord=" + passWord + "&validateCode=" + validateCode, function (data,textStatus, jqXHR) {
+        //if (validateCode == null || validateCode == "") {
+        //    swal("", "验证码不能为空", "error");
+        //    return;
+        //}
+        $.post('@Url.Action("Userlogin", "Login")', "userName=" + userName + "&passWord=" + passWord + "&IsRemember=" + IsRemember, function (data,textStatus, jqXHR) {
             if (data == "success") {
                 window.location.href ='@Url.Action("Index", "Home")';
             }

@@ -109,7 +109,7 @@
             <ul class="nav sidebar-menu">
                 <!--Dashboard-->
                 <li>
-                    <a href="javascript:void(0);" onclick="Navigation('@Url.Action("ShopsReport","Home")',this)">
+                    <a href="javascript:void(0);" onclick="Navigation('@Url.Action("ShopsView","Home")',this)">
                         <i class="menu-icon glyphicon glyphicon-home"></i>
                         <span class="menu-text"> 控制台 </span>
                     </a>
@@ -161,7 +161,7 @@
                         <ul class="breadcrumb" id="Ulbreadcrumb">
                             <li>
                                 <i class="fa fa-home"></i>
-                                <a href="javascript:void(0);" onclick="Navigation('@Url.Action("ShopsReport","Home")',this)">控制台</a>
+                                <a href="javascript:void(0);" onclick="Navigation('@Url.Action("ShopsView","Home")',this)">控制台</a>
                             </li>
                         </ul>
                     </li>
@@ -173,7 +173,7 @@
             </div>
             <!-- /Page Breadcrumb -->
             <div class="page-body">
-                <iframe style="width:100%;border:0" src="@Url.Action("ShopsReport","Home")" id="mainFrame" scrolling="auto" onload="changeFrameHeight()" frameborder="0"></iframe>
+                <iframe style="width:100%;border:0" src="@Url.Action("ShopsView","Home")" id="mainFrame" scrolling="auto" onload="changeFrameHeight()" frameborder="0"></iframe>
             </div>
         </div>
         <!-- /Page Content -->

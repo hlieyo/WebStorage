@@ -14,5 +14,10 @@ namespace Model
         public string UserName { get; set; }
 
         public string UserPwd { get; set; }
+
+        /// <summary>
+        /// 是否记住登陆 1：是 0：否
+        /// </summary>
+        public bool IsRemember { get; set; }
     }
 }

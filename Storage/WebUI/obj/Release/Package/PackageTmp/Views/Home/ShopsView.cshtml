@@ -173,6 +173,7 @@
     //ajax 加载产品数据
     function GetOrderList() {
         tableOrder = $('#tabOrder').dataTable({
+            iDisplayLength: 5,
             processing: false,
             serverSide: true,
             searching: false,

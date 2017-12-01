@@ -15,7 +15,11 @@ namespace WebUI.Controllers
         // GET: Login
         public ActionResult Index()
         {
-            return View();
+            var item = new ST_SysAdmin();
+            item.UserName = CookieService.GetCookie("uname") == null ? "" : CookieService.GetCookie("uname");
+            item.UserPwd = CookieService.GetCookie("upwd") == null ? "" : CookieService.GetCookie("upwd");
+            item.IsRemember = CookieService.GetCookie("isRemember") == null || CookieService.GetCookie("isRemember") .Equals("0")? false :true;
+            return View(item);
         }
 
         /// <summary>
@@ -39,15 +43,28 @@ namespace WebUI.Controllers
         /// <param name="validateCode">验证码</param>
         /// <returns></returns>
         [HttpPost]
-        public JsonResult Userlogin(string userName, string passWord, string validateCode)
+        public JsonResult Userlogin(string userName, string passWord, string validateCode,bool isRemember)
         {
             var result = new JsonResult();
-            //var cookie = CookieService.GetCookie("Code");
+            var cookie = CookieService.GetCookie("Code");
             //if (!validateCode.Equals(cookie))
             //{
             //    result.Data = "验证码验证错误";
             //    return result;
             //}
+            Session["sysAdmin"] = null;
+            if (isRemember)
+            {
+                CookieService.SetCookie("uname", userName,7);
+                CookieService.SetCookie("upwd", passWord,7);
+                CookieService.SetCookie("isRemember", isRemember?"1":"0",7);
+            }
+            else
+            {
+                CookieService.ClearCookie("uname");
+                CookieService.ClearCookie("upwd");
+                CookieService.ClearCookie("isRemember");
+            }
 
             ST_SysAdmin user = new ST_SysAdmin() { UserName = userName, UserPwd = PassWordService.MD5(passWord) };
             var loginUser = St_LogicHelper.UserLogin(user);

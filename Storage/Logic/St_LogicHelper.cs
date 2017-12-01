@@ -40,7 +40,7 @@ namespace Logic
         {
             model.EntityState = EntityState.Added;
             var sqlStr = new StringBuilder();
-            sqlStr.Append(" UPDATE [ST_Shops] SET  S_SumNum-=" + model.O_NUM + ",S_SumPrice-=" + model.O_SUMPRICE + ",S_OutDate=getdate() where ID=" + model.O_SHOPSID);
+            sqlStr.Append(" UPDATE [ST_Shops] SET  S_SumNum-=" + model.O_NUM + ",S_SumPrice-=(S_InPrice*" + model.O_NUM + "),S_OutDate=getdate() where ID=" + model.O_SHOPSID);
             return DBHelper.Save(model, new List<string> { sqlStr.ToString() }).ResultStatus;
         }
 

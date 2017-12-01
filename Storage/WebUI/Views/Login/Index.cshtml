@@ -1,4 +1,4 @@
-﻿
+﻿@model  Model.ST_SysAdmin
 @{
     ViewBag.Title = "登陆";
 }
@@ -8,10 +8,10 @@
         <div class="loginbox bg-white">
             <div class="loginbox-title"></div>
             <div class="loginbox-textbox">
-                <input type="text" class="form-control" placeholder="用户名" id="txtUserName" />
+                @Html.TextBoxFor(p => p.UserName, new { @class = "form-control", @id = "txtUserName", placeholder = "用户名" })
             </div>
             <div class="loginbox-textbox">
-                <input type="password" class="form-control" placeholder="密   码" id="txtPassWord" />
+                @Html.PasswordFor(p => p.UserPwd, new { @class = "form-control", @id = "txtPassWord", placeholder = "密   码" })
             </div>
             <div class="loginbox-textbox">
 
@@ -19,6 +19,7 @@
                     <input type="button" class="btn btn-primary btn-block" value="登  录" onclick="UserLogin()" style="width:130px">
 
                     <label style="margin-left:10px">
+                        @Html.CheckBoxFor(p => p.IsRemember, new { @class = "form-control", @id = "txtIsRemember", placeholder = "密   码" })
                         <input type="checkbox">
                         <span class="text">记住我</span>
                     </label>
@@ -42,7 +43,7 @@
         var userName = $("#txtUserName").val();
         var passWord = $("#txtPassWord").val();
         var validateCode = $("#txtValidateCode").val();
-
+        var IsRemember = $("#txtIsRemember").is(':checked');
         if (userName == null || userName == "") {
             swal("", "用户名不能为空", "error");
             return;
@@ -55,7 +56,7 @@
         //    swal("", "验证码不能为空", "error");
         //    return;
         //}
-        $.post('@Url.Action("Userlogin", "Login")', "userName=" + userName + "&passWord=" + passWord + "&validateCode=" + validateCode, function (data,textStatus, jqXHR) {
+        $.post('@Url.Action("Userlogin", "Login")', "userName=" + userName + "&passWord=" + passWord + "&IsRemember=" + IsRemember, function (data,textStatus, jqXHR) {
             if (data == "success") {
                 window.location.href ='@Url.Action("Index", "Home")';
             }

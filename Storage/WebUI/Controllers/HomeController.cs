@@ -204,12 +204,15 @@ namespace WebUI.Controllers
                 if (shops.ID == 0)
                 {
                     shops.S_INDATE = DateTime.Now;
+                    shops.S_SUMPRICE = shops.S_INPRICE * shops.S_SUMNUM;
                     shops.EntityState = System.Data.EntityState.Added;
                 }
                 else
                 {
                     shops.EntityState = System.Data.EntityState.Modified;
                 }
+
+
 
                 if (St_LogicHelper.SaveStShops(shops))
                 {
