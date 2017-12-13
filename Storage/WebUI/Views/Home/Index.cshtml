@@ -125,25 +125,23 @@
 
                     <ul class="submenu">
                         <li>
+                            <a href="javascript:void(0);" onclick="Navigation('@Url.Action("InView","Home")',this)">
+                                <span class="menu-text">进货记录</span>
+                            </a>
+                        </li>
+                        <li>
                             <a href="javascript:void(0);" onclick="Navigation('@Url.Action("ShopsView","Home")',this)">
                                  @*<i class="menu-icon glyphicon glyphicon-stats"></i>*@
                                 <span class="menu-text">库存列表</span>
-                            </a>
-                        </li>
-                        @*<li>
-                            <a href="javascript:void(0);" onclick="Navigation('@Url.Action("InView","Home")',this)">
-                                <span class="menu-text">进货记录</span>
                             </a>
                         </li>
                         <li>
                             <a href="javascript:void(0);" onclick="Navigation('@Url.Action("OutView","Home")',this)">
                                 <span class="menu-text"> 出货记录</span>
                             </a>
-                        </li>*@
+                        </li>
                     </ul>
                 </li>
-
-
 
             </ul>
             <!-- /Sidebar Menu -->

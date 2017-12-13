@@ -3,3 +3,4 @@ E:\WebStorage\Storage\Common\bin\Release\Common.pdb
 E:\WebStorage\Storage\Common\obj\Release\Common.csproj.CoreCompileInputs.cache
 E:\WebStorage\Storage\Common\obj\Release\Common.dll
 E:\WebStorage\Storage\Common\obj\Release\Common.pdb
+E:\WebStorage\Storage\Common\obj\Release\Common.csprojResolveAssemblyReference.cache

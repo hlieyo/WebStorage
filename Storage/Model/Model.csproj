@@ -45,7 +45,9 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ST_InStorage.cs" />
+    <Compile Include="ST_InStorageView.cs" />
     <Compile Include="ST_OutStorage.cs" />
+    <Compile Include="ST_OutStorageView.cs" />
     <Compile Include="ST_Shops.cs" />
     <Compile Include="ST_SysAdmin.cs" />
   </ItemGroup>

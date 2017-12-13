@@ -12,3 +12,24 @@ System.Data.SqlClient.SqlException (0x80131904): '=' 附近有语法错误。
 ClientConnectionId:f6429eb6-9ee1-44f4-9201-ba4dfb1fddad
 Error Number:102,State:1,Class:15
 
+----------------------------------2017/12/13 15:03:12--------------------------------------
+System.Data.SqlClient.SqlException (0x80131904): '=' 附近有语法错误。
+   在 Foundation.DataProvider.SqlClientSqlCommandSet.ExecuteNonQuery()
+   在 Foundation.DataProvider.DBHelper.ExceSave(Boolean isInnerTran, CustomResult result, SqlTransaction tran, List`1 entityList, List`1 lstSql)
+ClientConnectionId:9652364c-2d5a-4294-935f-3d0b21a988fd
+Error Number:102,State:1,Class:15
+
+----------------------------------2017/12/13 15:16:30--------------------------------------
+System.Data.SqlClient.SqlException (0x80131904): '=' 附近有语法错误。
+   在 Foundation.DataProvider.SqlClientSqlCommandSet.ExecuteNonQuery()
+   在 Foundation.DataProvider.DBHelper.ExceSave(Boolean isInnerTran, CustomResult result, SqlTransaction tran, List`1 entityList, List`1 lstSql)
+ClientConnectionId:1213a8eb-c107-4556-b224-7e34c1ebf9d7
+Error Number:102,State:1,Class:15
+
+----------------------------------2017/12/13 15:19:25--------------------------------------
+System.Data.SqlClient.SqlException (0x80131904): '=' 附近有语法错误。
+   在 Foundation.DataProvider.SqlClientSqlCommandSet.ExecuteNonQuery()
+   在 Foundation.DataProvider.DBHelper.ExceSave(Boolean isInnerTran, CustomResult result, SqlTransaction tran, List`1 entityList, List`1 lstSql)
+ClientConnectionId:18dd4de3-7b1f-4d78-bf9a-e2edccaf6800
+Error Number:102,State:1,Class:15
+

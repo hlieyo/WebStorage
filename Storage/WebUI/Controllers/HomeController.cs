@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Text;
+using System.Data;
 
 namespace WebUI.Controllers
 {
@@ -308,9 +309,13 @@ namespace WebUI.Controllers
                     JObject obj = JObject.Parse(parameter);
                     string idStr = obj["IdStr"] == null ? "" : obj["IdStr"].ToString();
                     var shopsId = "";
-                    if (!string.IsNullOrWhiteSpace(idStr))
+                    if (!string.IsNullOrWhiteSpace(idStr) && idStr.Contains(","))
                     {
                         shopsId= idStr.Remove(idStr.Length - 1, 1);
+                    }
+                    else
+                    {
+                        shopsId = idStr;
                     }
                     var listId = shopsId.Split(new char[] { ',' }).ToList();
                     result.Data = St_LogicHelper.DeleteShops(listId);
@@ -376,14 +381,92 @@ namespace WebUI.Controllers
             }
 
             var pageCount = 0;
-            var dt = St_LogicHelper.SelectByPages(" ST_Shops,ST_InStorage", "ST_Shops.S_TYPE,ST_Shops.S_CODE,ST_Shops.S_NAME,ST_Shops.S_BRAND,ST_Shops.S_UNIT,ST_InStorage.I_NUM,ST_InStorage.I_PRICE,ST_InStorage.I_SUMPRICE,ST_InStorage.I_ADDUSER, ST_InStorage.I_ADDTIME", "ST_InStorage.I_AddTime", true, Convert.ToInt32(length), pageIndex + 1, SearchStr.ToString(), "ID,i_shopsid", "", out pageCount);
+            var dt = St_LogicHelper.SelectByPages("ST_InStorage,ST_Shops", "ST_Shops.S_TYPE,ST_Shops.S_CODE,ST_Shops.S_NAME,ST_Shops.S_BRAND,ST_Shops.S_UNIT,ST_InStorage.I_NUM,ST_InStorage.I_PRICE,ST_InStorage.I_SUMPRICE,ST_InStorage.I_ADDUSER, ST_InStorage.I_ADDTIME", "I_AddTime", true, Convert.ToInt32(length), pageIndex + 1, SearchStr.ToString(), "ID,i_shopsid", "", out pageCount);
+
+            List<ST_InStorageView> list = new List<ST_InStorageView>();
+            foreach(DataRow dr in dt.Rows)
+            {
+                list.Add(new ST_InStorageView(dr));
+            }
             
             var resultObj = new
             {
                 draw = Convert.ToInt32(draw),
                 recordsTotal = pageCount,
                 recordsFiltered = pageCount,
-                data = dt
+                data = list
+            };
+            result.Data = resultObj;
+            return result;
+        }
+
+
+        /// <summary>
+        /// 分页获取出货数据
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public JsonResult GetOutStorageByPage()
+        {
+            var result = new JsonResult();
+            var start = Request.Form["start"]; //开始索引
+            var length = Request.Form["length"]; //页大小
+            var draw = Request.Form["draw"]; //原值返回
+            var search = Request.Form["search"]; //自定义查询条件
+
+            var shopsType = ""; //订单类型
+            var queryStr = ""; //搜索关键字
+            var querytime = "";
+            var pageIndex = (int)Math.Ceiling(Convert.ToInt32(start) * 1.0 / 10);
+
+            if (!string.IsNullOrWhiteSpace(search))
+            {
+                JObject obj = JObject.Parse(search);
+                if (obj != null)
+                {
+                    queryStr = obj["KeyWhere"] == null ? "" : obj["KeyWhere"].ToString();
+                    shopsType = obj["shopsType"] == null ? "" : obj["shopsType"].ToString();
+                    querytime = obj["querytime"] == null ? "" : obj["querytime"].ToString();
+                }
+            }
+
+            var SearchStr = new StringBuilder();
+            SearchStr.Append(" 1=1");
+
+            if (!string.IsNullOrWhiteSpace(querytime))
+            {
+                var time = querytime.Split(new char[] { '至' });
+                if (time.Count() == 2)
+                {
+                    SearchStr.Append(" and ST_OutStorage.O_AddTime>='" + DateTime.Parse(time[0] + " 00:00:00") + "'");
+                    SearchStr.Append(" and ST_OutStorage.O_AddTime<='" + DateTime.Parse(time[1] + " 23:59:59") + "'");
+                }
+            }
+            if (!string.IsNullOrWhiteSpace(queryStr))
+            {
+                SearchStr.Append(" and (ST_Shops.S_Code like '%" + queryStr + "%'  or  ST_Shops.S_Name like '%" + queryStr + "%')");
+            }
+
+            if (!string.IsNullOrWhiteSpace(shopsType) && !shopsType.Equals("分类"))
+            {
+                SearchStr.Append(" and  ST_Shops.S_Type='" + shopsType + "'");
+            }
+
+            var pageCount = 0;
+            var dt = St_LogicHelper.SelectByPages("ST_OutStorage,ST_Shops", "ST_Shops.S_TYPE,ST_Shops.S_CODE,ST_Shops.S_NAME,ST_Shops.S_BRAND,ST_Shops.S_UNIT,ST_OutStorage.O_Num,ST_OutStorage.O_Price,ST_OutStorage.O_SumPrice,ST_OutStorage.O_AddUser, ST_OutStorage.O_AddTime", "O_AddTime", true, Convert.ToInt32(length), pageIndex + 1, SearchStr.ToString(), "ID,O_ShopsId", "", out pageCount);
+
+            List<ST_OutStorageView> list = new List<ST_OutStorageView>();
+            foreach (DataRow dr in dt.Rows)
+            {
+                list.Add(new ST_OutStorageView(dr));
+            }
+
+            var resultObj = new
+            {
+                draw = Convert.ToInt32(draw),
+                recordsTotal = pageCount,
+                recordsFiltered = pageCount,
+                data = list
             };
             result.Data = resultObj;
             return result;

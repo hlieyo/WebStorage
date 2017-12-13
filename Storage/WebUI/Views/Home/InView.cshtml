@@ -73,9 +73,11 @@
 <script src="~/Content/assets/js/datatable/datatables.bootstrap.min.js"></script>
 <script src="~/Content/assets/js/datatable/datatables-init.js"></script>
 <script src="~/Content/assets/js/bootbox/bootbox.js"></script>
+
 <script type="text/javascript" src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
 <script type="text/javascript" src="~/Content/assets/js/fuelux/spinbox/fuelux.spinbox.js"></script>
 <script type="text/javascript" src="~/Content/assets/js/validation/bootstrapvalidator.js"></script>
+
 <script src="~/Content/assets/js/datetime/moment.js"></script>
 <script src="~/Content/assets/js/datetime/daterangepicker.js"></script>
 <script src="~/Content/assets/js/datetime/daterangepicker.zh-CN.js"></script>
@@ -141,6 +143,7 @@
         tableOrder.api().ajax.reload();
     }
 
+
     //ajax 加载产品数据
     function GetOrderList() {
         tableOrder = $('#tabOrder').dataTable({
@@ -187,30 +190,31 @@
                 }
             },
             columns: [
-                {
-                    data: "ID",
-                    title: "<label><input type=\"checkbox\"> <span class=\"text\"></span> </label>",
-                    render: function (data, type, full, meta) {
-                        return "<label><input type=\"checkbox\" value=" + full["ID"] + "> <span class=\"text\"></span> </label>";
-                    },
-                    width: "30px"
-                },
                 { data: "S_TYPE", title: "种类" },
                 { data: "S_CODE", title: "商品代码" },
                 { data: "S_NAME", title: "商品名称" },
-                { data: "S_SUMNUM", title: "数量" },
                 { data: "S_UNIT", title: "单位" },
+                { data: "S_BRAND", title: "品牌" },
+                { data: "I_NUM", title: "进货数量" },
                 { data: "I_PRICE", title: "进货单价" },
-                { data: "I_NUM", title: "进货数量",  },
-                { data: "I_SUMPRICE", title: "进货总额" },
-                { data: "I_ADDUSER", title: "进货人", },
+                { data: "I_SUMPRICE", title: "总价值",  },
                 {
                     data: "I_ADDTIME", title: "进货日期",
                     render: function (data, type, full, meta) { return formatDate(data); }
-                }
+                },
+                { data: "I_ADDUSER", title: "进货人" },
+                //
+                //,{
+                //    title: "操作",
+                //    //className: "buttons-preview",
+                //    render: function (data, type, full, meta) {
+                //        return "  <a href=\"javascript:void(0);\" class=\"btn btn-default  btn-circle btn-xs\" onclick=\"AddInStorage(" + full["ID"] + ")\" title=\"进货\" ><i class=\"glyphicon glyphicon-plus\"></i></a> <a href=\"javascript:void(0);\" class=\"btn btn-default  btn-circle btn-xs\" onclick=\"AddOutStorage(" + full["ID"] + ")\" title=\"出货\"><i class=\"glyphicon glyphicon-minus\"></i></a> <a href=\"javascript:void(0);\" class=\"btn btn-default  btn-circle btn-xs\" onclick=\"DeleteProduct(" + full["ID"] + ")\" title=\"删除\"><i class=\"glyphicon glyphicon-remove\"></i></a>";
+                //    }
+                //}
             ]
         });
     }
+
 
     //页面初始化 加载JS
     $(function () {

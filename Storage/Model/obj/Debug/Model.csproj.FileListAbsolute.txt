@@ -4,3 +4,4 @@ E:\WebStorage\Storage\Model\bin\Debug\Foundation.Cls.dll
 E:\WebStorage\Storage\Model\obj\Debug\Model.csproj.CoreCompileInputs.cache
 E:\WebStorage\Storage\Model\obj\Debug\Model.dll
 E:\WebStorage\Storage\Model\obj\Debug\Model.pdb
+E:\WebStorage\Storage\Model\obj\Debug\Model.csprojResolveAssemblyReference.cache
