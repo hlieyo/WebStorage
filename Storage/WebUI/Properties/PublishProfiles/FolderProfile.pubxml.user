@@ -22,10 +22,10 @@
       <publishTime>11/27/2017 14:19:13</publishTime>
     </File>
     <File Include="bin/Common.dll">
-      <publishTime>11/29/2017 09:44:13</publishTime>
+      <publishTime>12/13/2017 14:03:19</publishTime>
     </File>
     <File Include="bin/Common.pdb">
-      <publishTime>11/29/2017 09:44:13</publishTime>
+      <publishTime>12/13/2017 14:03:19</publishTime>
     </File>
     <File Include="bin/Foundation.Cls.dll">
       <publishTime>04/20/2016 22:17:12</publishTime>
@@ -34,10 +34,10 @@
       <publishTime>04/20/2016 22:17:12</publishTime>
     </File>
     <File Include="bin/Logic.dll">
-      <publishTime>11/29/2017 09:44:13</publishTime>
+      <publishTime>12/19/2017 17:36:45</publishTime>
     </File>
     <File Include="bin/Logic.pdb">
-      <publishTime>11/29/2017 09:44:13</publishTime>
+      <publishTime>12/19/2017 17:36:45</publishTime>
     </File>
     <File Include="bin/Microsoft.AI.Agent.Intercept.dll">
       <publishTime>11/30/2016 16:07:42</publishTime>
@@ -67,10 +67,10 @@
       <publishTime>01/05/2012 11:08:46</publishTime>
     </File>
     <File Include="bin/Model.dll">
-      <publishTime>11/29/2017 09:44:13</publishTime>
+      <publishTime>12/19/2017 17:36:44</publishTime>
     </File>
     <File Include="bin/Model.pdb">
-      <publishTime>11/29/2017 09:44:13</publishTime>
+      <publishTime>12/19/2017 17:36:44</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
       <publishTime>08/03/2014 20:33:56</publishTime>
@@ -178,10 +178,10 @@
       <publishTime>09/10/2013 17:28:38</publishTime>
     </File>
     <File Include="bin/WebUI.dll">
-      <publishTime>11/29/2017 09:44:17</publishTime>
+      <publishTime>12/19/2017 17:36:49</publishTime>
     </File>
     <File Include="bin/WebUI.pdb">
-      <publishTime>11/29/2017 09:44:17</publishTime>
+      <publishTime>12/19/2017 17:36:49</publishTime>
     </File>
     <File Include="bin/zh-Hans/System.Web.Helpers.resources.dll">
       <publishTime>01/28/2015 04:04:32</publishTime>
@@ -1285,19 +1285,19 @@
       <publishTime>11/28/2017 10:00:25</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>11/29/2017 09:29:38</publishTime>
+      <publishTime>12/13/2017 14:10:36</publishTime>
     </File>
     <File Include="Views/Home/InView.cshtml">
-      <publishTime>11/28/2017 16:53:15</publishTime>
+      <publishTime>12/13/2017 15:01:51</publishTime>
     </File>
     <File Include="Views/Home/OutView.cshtml">
-      <publishTime>11/28/2017 09:32:31</publishTime>
+      <publishTime>12/13/2017 15:12:56</publishTime>
     </File>
     <File Include="Views/Home/ShopsReport.cshtml">
       <publishTime>11/28/2017 09:32:31</publishTime>
     </File>
     <File Include="Views/Home/ShopsView.cshtml">
-      <publishTime>11/28/2017 13:37:21</publishTime>
+      <publishTime>12/13/2017 15:20:05</publishTime>
     </File>
     <File Include="Views/Login/Index.cshtml">
       <publishTime>11/29/2017 09:19:11</publishTime>
